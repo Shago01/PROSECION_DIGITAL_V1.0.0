@@ -38,9 +38,9 @@ El código del proyecto está alojado en un repositorio de GitHub, con un flujo 
 ### Ramas principales:
  - `main`: Contiene el código estable en producción.
  - `develop`: Rama de desarrollo donde se integran las nuevas funcionalidades.
-
+{id-product-feature} all in lowercase, replacing id with the issue number, product-feature with the title of the issue (the title can be abbreviated if its too long) and joining words with a -
 ### Ramas de características: 
-Se crean con el prefijo `feature/HU-[código]-[descripción-corta]` para nuevas funcionalidades.
+Se crean con el prefijo `feature/[id]-[product-feature]` para nuevas funcionalidades, el `id` es el numero de la issue y `product-feature` el titulo
 ### Estándares de commits:
  - `feat`: Nueva funcionalidad.
  - `fix`: Correción de errores. 
