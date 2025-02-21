@@ -6,17 +6,20 @@
   "scripts": {
     "start": "tsx watch ./src/server",
     "tsc": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test-acceptence": "cucumber-js tests"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@cucumber/cucumber": "^11.2.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.13.4",
+    "axios": "^1.7.9",
     "morgan": "^1.10.0",
+    "ts-node": "^10.9.2",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"
   },
