@@ -6,7 +6,9 @@
   "scripts": {
     "start": "tsx watch ./src/server",
     "tsc": "tsc",
-    "test-acceptence": "cucumber-js tests"
+    "test-acceptence": "cucumber-js tests",
+    "test-unit": "jest",
+    "test-unit:watch": "jest --watchAll"
   },
   "keywords": [],
   "author": "",
@@ -15,11 +17,16 @@
     "@cucumber/cucumber": "^11.2.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
+    "@types/jest": "^29.5.14",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.13.4",
     "axios": "^1.7.9",
+    "jest": "^29.7.0",
     "morgan": "^1.10.0",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.6",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"
   },

@@ -1,7 +1,7 @@
 import { PORT } from '@config/dotenv';
 import app from './app';
 
-app.listen(PORT, err => {
+const server = app.listen(PORT, err => {
   if (err) {
     console.log(
       `
@@ -26,3 +26,5 @@ app.listen(PORT, err => {
     `,
   );
 });
+
+export { server, app };
