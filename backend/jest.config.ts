@@ -8,6 +8,7 @@ const config: Config = {
   },
   silent: true,
   verbose: true,
+  setupFilesAfterEnv: ['<rootDir>/tests/unit/setup.ts'],
 };
 
 export default config;

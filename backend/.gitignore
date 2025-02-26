@@ -3,3 +3,6 @@ node_modules
 
 # ignorar las variables de entorno
 .env
+
+# innorar las varialbes de entorno de pruebas
+.env.test
