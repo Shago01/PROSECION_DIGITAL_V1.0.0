@@ -31,6 +31,7 @@ type ActiveNazareno = Pick<Nazareno, 'active'>;
 type NazarenoResponse = Omit<Nazareno, 'birthdate'>;
 type CodeNazareno = Pick<Nazareno, 'code'>;
 type DocumenNumber = Pick<Nazareno, 'documentNumber'>;
+type ResNazareno = Omit<Nazareno, 'birthdate'>;
 
 export {
   ActiveNazareno,
@@ -39,5 +40,6 @@ export {
   Nazareno,
   NazarenoCreation,
   NazarenoResponse,
+  ResNazareno,
   Sex,
 };

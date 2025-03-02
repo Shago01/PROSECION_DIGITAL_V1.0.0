@@ -1,9 +1,14 @@
-import type { DocumentType, NazarenoCreation, Sex } from '@contracts/nazareno';
+import type {
+  DocumentType,
+  NazarenoCreation,
+  ResNazareno,
+  Sex,
+} from '@contracts/nazareno';
 import AppError from '@erros/appError';
 import { ErrorMessage } from '@erros/enum/error.message';
 import generateCode from '@utils/generateCode';
 
-export default class NazarenoRequest implements NazarenoCreation {
+export class NazarenoRequest implements NazarenoCreation {
   code: string;
   documentType!: DocumentType;
   sex!: Sex;
@@ -134,5 +139,46 @@ export default class NazarenoRequest implements NazarenoCreation {
   validatePhoneNumber(value: string) {
     if (!/^\d{10}$/.test(value))
       this.addError(ErrorMessage.INVALID_PHONE_NUMBER);
+  }
+}
+
+export class NazarenoResponse implements ResNazareno {
+  age!: number;
+  code!: string;
+  yearsActive!: number;
+  active!: boolean;
+  documentType!: DocumentType;
+  sex!: Sex;
+  documentNumber!: string;
+  firstName!: string;
+  middleName!: string | undefined;
+  firstLastName!: string;
+  secondLastName!: string;
+  email?: string | undefined;
+  phoneNumber!: string;
+  address!: string;
+  country!: string;
+  city!: string;
+  department!: string;
+  birthdate?: string;
+
+  constructor(data: ResNazareno) {
+    Object.assign(this, data);
+    this.age = this.getAge();
+    delete this.birthdate;
+  }
+
+  getAge(): number {
+    if (!this.birthdate) throw new AppError(ErrorMessage.SERVER_ERROR, 500);
+    const currentDate = new Date();
+    const birthdate = new Date(this.birthdate);
+
+    if (
+      currentDate.getMonth() < birthdate.getMonth() ||
+      (currentDate.getMonth() === birthdate.getMonth() &&
+        currentDate.getDay() < birthdate.getDay())
+    )
+      return currentDate.getFullYear() - birthdate.getFullYear() - 1;
+    return currentDate.getFullYear() - birthdate.getFullYear();
   }
 }
