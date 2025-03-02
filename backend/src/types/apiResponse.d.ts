@@ -1,3 +1,4 @@
+import { Nazareno } from './nazareno';
 import { Token } from './users';
 
 type Data<T> = T;

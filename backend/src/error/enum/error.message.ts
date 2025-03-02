@@ -35,6 +35,8 @@ export enum ErrorMessage {
   INVALID_STATUS = 'El estado debe ser un valor booleano (activo/inactivo).',
   INVALID_CODE = 'Código inválido.',
   INVALID_SEX = 'Sexo inválido.',
+  INVALID_DATE_FORMAT = 'Formato de fecha inválido.',
+  INVALID_DATE_RANGE = 'Rango de fechas inválido.',
 
   // ⚠️ Resource Errors
   NOT_FOUND = 'Recurso no encontrado.',
