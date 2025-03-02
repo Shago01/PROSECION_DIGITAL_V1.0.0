@@ -1,11 +1,11 @@
 import { ErrorMessage } from '@erros/enum/error.message';
-import { Sequelize, DataTypes, UUID } from 'sequelize';
+import { Sequelize, DataTypes, UUID, UUIDV4 } from 'sequelize';
 
 export default (sequelize: Sequelize) => {
   const User = sequelize.define('User', {
     id: {
       type: UUID,
-      defaultValue: UUID,
+      defaultValue: new UUIDV4(),
       allowNull: false,
       primaryKey: true,
     },
@@ -24,15 +24,8 @@ export default (sequelize: Sequelize) => {
       },
     },
     password: {
-      type: new DataTypes.STRING(128),
+      type: new DataTypes.STRING(200),
       allowNull: false,
-      validate: {
-        isValidatePassword(value: string) {
-          if (!/^(?=.*[A-Z])(?=.*\d.*\d)[\w@?*]{8,}$/.test(value)) {
-            throw new Error(ErrorMessage.INVALID_PASSWORD);
-          }
-        },
-      },
     },
     name: {
       type: DataTypes.STRING(),

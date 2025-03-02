@@ -8,11 +8,13 @@ export class UserRequest implements UserCreation {
   username!: string;
   password!: string;
   rol!: UserRol;
-  erros: any[] | undefined = undefined;
+  errors?: any[] = [];
 
   constructor(data: UserCreation) {
-    this.validateData(data), Object.assign(this, data);
-    if (!this.erros) delete this.erros;
+    this.validateData(data);
+    Object.assign(this, data);
+
+    delete this.errors;
   }
 
   validateData(data: UserCreation) {
@@ -20,7 +22,6 @@ export class UserRequest implements UserCreation {
       name: this.validateName,
       email: this.validateEmail,
       username: this.validateUsername,
-      password: this.validatePassword,
       rol: this.validateRol,
     };
 
@@ -29,8 +30,8 @@ export class UserRequest implements UserCreation {
       if (value !== undefined) validator.call(this, value);
     });
 
-    if (this.erros && this.erros.length != 0)
-      throw new AppError(ErrorMessage.BAD_REQUEST, 400, this.erros);
+    if (this.errors && this.errors.length > 0)
+      throw new AppError(ErrorMessage.BAD_REQUEST, 400, this.errors);
   }
 
   validateName(name: string) {
@@ -38,28 +39,42 @@ export class UserRequest implements UserCreation {
   }
 
   validateEmail(email: string) {
-    if (!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(email))
+    if (!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(email)) {
       this.addError(ErrorMessage.INVALID_EMAIL);
+    }
   }
 
   validateUsername(username: string) {
-    if (!/^[a-zA-Z0-9_]+$/.test(username))
+    if (!/^[a-zA-Z0-9._-]+$/.test(username)) {
       this.addError(ErrorMessage.INVALID_USERNAME);
+    }
   }
 
-  validatePassword(password: string) {
-    if (!/^(?=.*[A-Z])(?=.*\d.*\d)[\w@?*]{8,}$/.test(password))
-      this.addError(ErrorMessage.INVALID_PASSWORD);
-  }
-  validateRol(name: string) {
-    if (['admin', 'root', 'register', 'supervisor'].includes(name))
+  validateRol(rol: string) {
+    const validRoles: UserRol[] = ['admin', 'root', 'register', 'supervisor'];
+    if (!validRoles.includes(rol as UserRol)) {
       this.addError(ErrorMessage.INVALID_ROLE);
+    }
   }
 
   addError(message: string) {
-    if (!this.erros) this.erros = [];
-    this.erros.push({
-      msg: message,
-    });
+    if (!this.errors) this.errors = [];
+    this.errors.push({ msg: message });
+  }
+}
+
+export class UserResponse implements UserResponse {
+  id!: string;
+  name!: string;
+  email!: string;
+  username!: string;
+  rol!: UserRol;
+
+  constructor({ email, id, name, rol, username }: UserResponse) {
+    this.email = email;
+    this.id = id;
+    this.name = name;
+    this.rol = rol;
+    this.username = username;
   }
 }

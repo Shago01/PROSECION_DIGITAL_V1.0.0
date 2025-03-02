@@ -9,9 +9,9 @@ class UserRepository {
     return await User?.create(user as any);
   }
 
-  async getUserByUserName(userName: string) {
+  async getUserByUserName(username: string) {
     const { User } = models;
-    return await User?.findOne({ where: { userName } });
+    return await User?.findOne({ where: { username } });
   }
 }
 
