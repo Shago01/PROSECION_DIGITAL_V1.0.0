@@ -83,7 +83,7 @@ export default (sequelize: Sequelize) => {
     },
     yearsActive: {
       type: DataTypes.INTEGER,
-      defaultValue: 0,
+      defaultValue: 1,
     },
   });
 };
