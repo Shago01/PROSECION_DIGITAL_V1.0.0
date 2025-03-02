@@ -1,4 +1,4 @@
-import { UserCreation, UserRol } from '@contracts/user';
+import { UserCreation, UserLogin, UserRol } from '@contracts/user';
 import AppError from '@erros/appError';
 import { ErrorMessage } from '@erros/enum/error.message';
 
@@ -76,5 +76,15 @@ export class UserResponse implements UserResponse {
     this.name = name;
     this.rol = rol;
     this.username = username;
+  }
+}
+
+export class LoginUser implements UserLogin {
+  username: string;
+  password: string;
+
+  constructor({ password, username }: UserLogin) {
+    this.username = username;
+    this.password = password;
   }
 }
