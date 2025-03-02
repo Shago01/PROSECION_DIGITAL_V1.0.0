@@ -37,6 +37,13 @@ export enum ErrorMessage {
   INVALID_SEX = 'Sexo inválido.',
   INVALID_DATE_FORMAT = 'Formato de fecha inválido.',
   INVALID_DATE_RANGE = 'Rango de fechas inválido.',
+  INVALID_PASSWORD = 'Contraseña inválida.',
+  PASSWORD_REQUIRED = 'La contraseña es obligatoria.',
+  INVALID_NEW_PASSWORD = 'Nueva contraseña inválida.',
+  INVALID_ROLE = 'Rol inválido.',
+  INVALID_USER = 'Usuario inválido.',
+  INVALID_NAME = 'Nombre inválido.',
+  INVALID_USERNAME = 'Nombre de usuario inválido.',
 
   // ⚠️ Resource Errors
   NOT_FOUND = 'Recurso no encontrado.',
