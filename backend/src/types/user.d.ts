@@ -19,4 +19,14 @@ type UserLogin = Pick<User, 'username' | 'password'>;
 
 type UserPyloadJWT = Pick<User, 'id' | 'username' | 'rol'>;
 
-export { Token, User, UserCreation, UserLogin, UserPyloadJWT, UserRol };
+type UserResponse = Omit<User, 'password'>;
+
+export {
+  Token,
+  User,
+  UserCreation,
+  UserLogin,
+  UserPyloadJWT,
+  UserResponse,
+  UserRol,
+};

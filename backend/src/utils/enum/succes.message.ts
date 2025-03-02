@@ -6,4 +6,8 @@ export enum successMessage {
   FETCHED = 'Datos obtenidos.',
   FETCHED_ALL = 'Registros recuperados.',
   FETCHED_ONE = 'Registro encontrado.',
+  LOGIN = 'Inicio de sesión exitoso.',
+  LOGOUT = 'Cierre de sesión exitoso.',
+  FORGOT_PASSWORD = 'Correo electrónico enviado.',
+  RESET_PASSWORD = 'Contraseña restablecida.',
 }
