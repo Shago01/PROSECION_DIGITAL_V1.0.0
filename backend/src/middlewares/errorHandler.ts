@@ -1,10 +1,10 @@
-import { NextFunction, Request, Response } from 'express';
 import AppError from '@erros/appError';
 import { ErrorMessage } from '@erros/enum/error.message';
+import { NextFunction, Request, Response } from 'express';
 
 export default function errorHandler(
   err: Error,
-  _: Request,
+  _req: Request,
   res: Response,
   _next: NextFunction,
 ) {
@@ -13,16 +13,19 @@ export default function errorHandler(
       🧾 msg : ${err.message} 
     `);
 
-  if (err instanceof AppError)
-    return res.status(err.status).json({
+  if (err instanceof AppError) {
+    res.status(err.status).json({
       err: {
         msg: err.message,
+        details: err.details,
       },
     });
-
-  return res.status(500).json({
-    err: {
-      msg: ErrorMessage.SERVER_ERROR,
-    },
-  });
+  } else {
+    res.status(500).json({
+      err: {
+        msg: ErrorMessage.SERVER_ERROR,
+        details: null,
+      },
+    });
+  }
 }

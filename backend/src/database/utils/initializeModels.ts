@@ -6,12 +6,7 @@ export default async function initializeModels(sequelize: Sequelize) {
     await loadDynamicModules('./database/models', sequelize);
 
     const {} = sequelize.models;
-    console.log(sequelize.models);
-    console.log(`
-      ✅ Conectado a la base de datos
-      ✅ Modelos cargados a sequelize
-      ✅ Relaciones anexadas a los modelos
-      `);
+    console.log('Estos son los modelos existentes:  \n', sequelize.models);
   } catch (err: any) {
     console.log(`
       ❌ Error:

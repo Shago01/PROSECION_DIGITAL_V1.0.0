@@ -1,15 +1,15 @@
 import { PORT } from '@config/dotenv';
+import { sequelize } from '@config/sequelizeConfig';
+import { setupDatabase } from '@database/setup.db';
 import express from 'express';
 import setupApp from './app';
-import sequelize from '@config/sequelizeConfig';
 
 const app = express();
-setupApp(app);
 
 async function starServer() {
   try {
-    //TODO: Cambiar por autenticación
-    await sequelize.sync({ force: true });
+    setupApp(app);
+    await setupDatabase(sequelize);
     app.listen(PORT, err => {
       if (err) {
         console.log(
