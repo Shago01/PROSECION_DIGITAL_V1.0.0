@@ -1,4 +1,4 @@
-import NazarenoRequest from '@dto/nazareno.dto';
+import { NazarenoRequest, NazarenoResponse } from '@dto/nazareno.dto';
 import nazarenoService from '@services/nazareno.service';
 import { successMessage } from '@utils/enum/succes.message';
 import successResponse from '@utils/succesresponse';
@@ -16,7 +16,8 @@ class nazarenoController {
       const data = new NazarenoRequest(body);
       const dataResponse = (await nazarenoService.createNazareno(data))
         ?.dataValues;
-      successResponse(res, dataResponse, successMessage.CREATED);
+      const response = new NazarenoResponse(dataResponse);
+      successResponse(res, response, successMessage.CREATED);
     } catch (error) {
       nex(error);
     }
