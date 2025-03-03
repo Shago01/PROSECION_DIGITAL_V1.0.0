@@ -1,4 +1,4 @@
-import NazarenoRequest from '@dto/nazareno.dto';
+import type { NazarenoRequest } from '@dto/nazareno.dto';
 import AppError from '@erros/appError';
 import { ErrorMessage } from '@erros/enum/error.message';
 import nazarenoRespository from '@repositories/nazareno.respository';

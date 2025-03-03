@@ -10,9 +10,13 @@ import bcrypt from 'bcrypt';
 class UserService {
   constructor() {}
 
-  async createUser(user: UserRequest) {
+  async createUser(user: UserRequest, rolreq: string) {
+    if (user.rol === rol.ROOT && rolreq !== rol.ROOT)
+      throw new AppError(ErrorMessage.FORBIDDEN, 403);
+
     if (await userRespository.getUserByUserName(user.username))
       throw new AppError(ErrorMessage.ALREADY_EXISTS, 409);
+
     return await userRespository.saveUser(user);
   }
 
