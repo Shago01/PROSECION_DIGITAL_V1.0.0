@@ -1,8 +1,8 @@
+import { hashPassword } from '@utils/hashPassword';
 import validatePassword from '@utils/validatePassword';
 import { NextFunction, Request, Response } from 'express';
-import bcrypt from 'bcrypt';
 
-export default function hashPassword(
+export default function hashPasswordMiddlware(
   { body }: Request,
   _res: Response,
   next: NextFunction,
@@ -11,7 +11,7 @@ export default function hashPassword(
     const { password } = body;
 
     validatePassword(password);
-    const passwordHash = bcrypt.hashSync(password, 10);
+    const passwordHash = hashPassword(password);
     body.password = passwordHash;
 
     next();
