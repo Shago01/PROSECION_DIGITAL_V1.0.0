@@ -4,7 +4,7 @@ import { hashPassword } from '@utils/hashPassword';
 export async function rootSeeders() {
   const { User } = models;
   const rootUserTemp = await User?.findOne({
-    where: { username: 'temp-root' },
+    where: { rol: 'root' },
   });
   if (!rootUserTemp) {
     await User?.create({
