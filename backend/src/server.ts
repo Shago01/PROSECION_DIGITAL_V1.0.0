@@ -3,6 +3,7 @@ import { sequelize } from '@config/sequelizeConfig';
 import { setupDatabase } from '@database/setup.db';
 import express from 'express';
 import setupApp from './app';
+import { runSeeders } from './seeders/runSeeders';
 
 const app = express();
 
@@ -10,6 +11,7 @@ async function starServer() {
   try {
     setupApp(app);
     await setupDatabase(sequelize);
+    await runSeeders();
     app.listen(PORT, err => {
       if (err) {
         console.log(
