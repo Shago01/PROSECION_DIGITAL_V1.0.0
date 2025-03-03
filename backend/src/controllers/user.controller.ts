@@ -34,6 +34,22 @@ class UserController {
       next(err);
     }
   }
+
+  async deleteUser(
+    { params, body }: Request,
+    res: Response,
+    next: NextFunction,
+  ) {
+    try {
+      const { id } = params;
+      const { rol } = body.payload;
+      await userService.deleteUser(id, rol);
+
+      successResponse(res, {}, successMessage.DELETED);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export default new UserController();
