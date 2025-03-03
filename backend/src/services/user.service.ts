@@ -37,11 +37,25 @@ class UserService {
     if (!idUser || !rolReq) throw new AppError(ErrorMessage.BAD_REQUEST, 400);
     const user = (await userRespository.getUserById(idUser))?.dataValues;
 
+    // * verificaccion que el usuario exista
     if (!user) throw new AppError(ErrorMessage.NOT_FOUND, 404);
-    if (user.rol === rol.ROOT && rolReq !== rol.ROOT)
-      throw new AppError(ErrorMessage.FORBIDDEN, 403);
+
+    // * verificacion basada en roles
+    if (user.rol === rol.ROOT) await this.validateDeleteRootUser(rolReq);
+    if (user.rol === rol.ADMIN) this.validateDeleteAdminUser(rolReq);
 
     return await userRespository.dropUser(idUser);
+  }
+
+  private async validateDeleteRootUser(rolReq: UserRol) {
+    if (rolReq !== rol.ROOT) throw new AppError(ErrorMessage.FORBIDDEN, 403);
+    if ((await userRespository.countUserByRol(rol.ROOT)) === 1)
+      throw new AppError(ErrorMessage.LAST_ROOT, 403);
+  }
+
+  private validateDeleteAdminUser(rolReq: UserRol) {
+    if (![rol.ADMIN, rol.ROOT].includes(rolReq as rol))
+      throw new AppError(ErrorMessage.FORBIDDEN, 403);
   }
 }
 

@@ -50,6 +50,7 @@ export enum ErrorMessage {
   NOT_FOUND = 'Recurso no encontrado.',
   ALREADY_EXISTS = 'El recurso ya existe.',
   UNMODIFIABLE_RESOURCE = 'El recurso no puede ser modificado.',
+  LAST_ROOT = 'No puedes eliminar el único usuario ROOT.',
 
   // ⚠️ Request Errors
   BAD_REQUEST = 'Solicitud incorrecta.',

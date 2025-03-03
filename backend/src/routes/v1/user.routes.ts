@@ -13,12 +13,24 @@ userRoutes.post('/login', userController.loginUser);
 userRoutes.use(verifyToken);
 
 // * rutas accesibles solo para el rol ROOT
-userRoutes.use(verifyRol([rol.ROOT]));
-userRoutes.post('/newRoot', hashPasswordMiddlware, userController.singUser);
+userRoutes.post(
+  '/newRoot',
+  verifyRol([rol.ROOT]),
+  hashPasswordMiddlware,
+  userController.singUser,
+);
 
 // * rutas accesibles para los roles ROOT y ADMIN
-userRoutes.use(verifyRol([rol.ROOT, rol.ADMIN]));
-userRoutes.post('/newUser', hashPasswordMiddlware, userController.singUser);
-userRoutes.delete('/:id', userController.deleteUser);
+userRoutes.post(
+  '/newUser',
+  verifyRol([rol.ROOT, rol.ADMIN]),
+  hashPasswordMiddlware,
+  userController.singUser,
+);
+userRoutes.delete(
+  '/:id',
+  verifyRol([rol.ROOT, rol.ADMIN]),
+  userController.deleteUser,
+);
 
 export default userRoutes;
