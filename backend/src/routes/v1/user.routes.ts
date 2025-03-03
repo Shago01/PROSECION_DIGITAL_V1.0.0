@@ -8,17 +8,17 @@ import { Router } from 'express';
 const userRoutes = Router();
 
 // * ruta para el login de usuarios
-userRoutes.post('/login', hashPasswordMiddlware, userController.loginUser);
+userRoutes.post('/login', userController.loginUser);
 
 userRoutes.use(verifyToken);
 
 // * rutas accesibles solo para el rol ROOT
 userRoutes.use(verifyRol([rol.ROOT]));
-userRoutes.post('/newRoot', userController.singUser);
+userRoutes.post('/newRoot', hashPasswordMiddlware, userController.singUser);
 
 // * rutas accesibles para los roles ROOT y ADMIN
 userRoutes.use(verifyRol([rol.ROOT, rol.ADMIN]));
-userRoutes.post('/newUser', userController.singUser);
-userRoutes.delete('/deleteUser/:id', userController.deleteUser);
+userRoutes.post('/newUser', hashPasswordMiddlware, userController.singUser);
+userRoutes.delete('/:id', userController.deleteUser);
 
 export default userRoutes;

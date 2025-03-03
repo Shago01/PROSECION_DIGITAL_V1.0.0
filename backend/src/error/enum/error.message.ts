@@ -44,6 +44,7 @@ export enum ErrorMessage {
   INVALID_USER = 'Usuario inválido.',
   INVALID_NAME = 'Nombre inválido.',
   INVALID_USERNAME = 'Nombre de usuario inválido.',
+  INVALID_LOGIN = 'El usuario no existe o la contraseña es incorrecta.',
 
   // ⚠️ Resource Errors
   NOT_FOUND = 'Recurso no encontrado.',
@@ -54,6 +55,7 @@ export enum ErrorMessage {
   BAD_REQUEST = 'Solicitud incorrecta.',
   METHOD_NOT_ALLOWED = 'Método no permitido.',
   TIMEOUT = 'Tiempo de espera agotado.',
+  FORBIDDEN = 'No cuentas con los privilegios necesarios para realizar esta acción.',
 
   // ⚠️ Permission Errors
   INSUFFICIENT_PERMISSIONS = 'Permisos insuficientes.',
