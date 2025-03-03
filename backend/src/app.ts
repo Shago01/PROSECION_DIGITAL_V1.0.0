@@ -2,7 +2,7 @@ import { NODE_ENV } from '@config/dotenv';
 import errorHandler from '@middlewares/errorHandler';
 import apiRoutes from '@routes/api.routes';
 import cors from 'cors';
-import { Express, Handler, json } from 'express';
+import { Express, json } from 'express';
 import morgan from 'morgan';
 
 export default (app: Express) => {

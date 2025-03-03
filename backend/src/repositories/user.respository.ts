@@ -13,6 +13,21 @@ class UserRepository {
     const { User } = models;
     return await User?.findOne({ where: { username } });
   }
+
+  async getUserById(id: string) {
+    const { User } = models;
+    return await User?.findByPk(id);
+  }
+
+  async dropUser(id: string) {
+    const { User } = models;
+    return await User?.destroy({ where: { id } });
+  }
+
+  async countUserByRol(rol: string) {
+    const { User } = models;
+    return await User?.count({ where: { rol } });
+  }
 }
 
 export default new UserRepository();
