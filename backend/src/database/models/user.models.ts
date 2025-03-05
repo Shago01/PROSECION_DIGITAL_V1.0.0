@@ -1,8 +1,9 @@
+import { NameModel } from '@database/utils/enum/nameModles';
 import { ErrorMessage } from '@erros/enum/error.message';
 import { Sequelize, DataTypes, UUID, UUIDV4 } from 'sequelize';
 
 export default (sequelize: Sequelize) => {
-  const User = sequelize.define('User', {
+  const User = sequelize.define(NameModel.USER, {
     id: {
       type: UUID,
       defaultValue: new UUIDV4(),

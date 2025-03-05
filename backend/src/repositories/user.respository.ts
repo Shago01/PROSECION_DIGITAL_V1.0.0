@@ -1,32 +1,33 @@
-import { models } from '@database/setup.db';
+import { NameModel } from '@database/utils/enum/nameModles';
+import validateModel from '@database/utils/validate.models';
 import { UserRequest } from '@dto/user.dto';
 
 class UserRepository {
   constructor() {}
 
   async saveUser(user: UserRequest) {
-    const { User } = models;
-    return await User?.create(user as any);
+    const User = validateModel(NameModel.USER);
+    return await User.create(user as any);
   }
 
   async getUserByUserName(username: string) {
-    const { User } = models;
-    return await User?.findOne({ where: { username } });
+    const User = validateModel(NameModel.USER);
+    return await User.findOne({ where: { username } });
   }
 
   async getUserById(id: string) {
-    const { User } = models;
-    return await User?.findByPk(id);
+    const User = validateModel(NameModel.USER);
+    return await User.findByPk(id);
   }
 
   async dropUser(id: string) {
-    const { User } = models;
-    return await User?.destroy({ where: { id } });
+    const User = validateModel(NameModel.USER);
+    return await User.destroy({ where: { id } });
   }
 
   async countUserByRol(rol: string) {
-    const { User } = models;
-    return await User?.count({ where: { rol } });
+    const User = validateModel(NameModel.USER);
+    return await User.count({ where: { rol } });
   }
 }
 
