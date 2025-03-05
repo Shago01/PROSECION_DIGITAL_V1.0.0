@@ -11,8 +11,10 @@ class UserController {
 
   async singUser({ body }: Request, res: Response, next: NextFunction) {
     try {
+      const rolreq = body.payload.rol;
       const userDto = new UserRequest(body);
-      const userData = (await userService.createUser(userDto))?.dataValues;
+      const userData = (await userService.createUser(userDto, rolreq))
+        ?.dataValues;
       const resUser = new UserResponse(userData);
       successResponse(res, resUser, successMessage.CREATED);
     } catch (err) {
