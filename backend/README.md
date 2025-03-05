@@ -60,9 +60,17 @@ npm install
 3. Configura las variables de entorno en un archivo .env:
 
 ```
-DATABASE_URL=postgres://user:password@localhost:5432/nazarenos
-JWT_SECRET=tu_secreto
-PORT=3000
+NODE_ENV=
+
+PORT=
+
+DB_USER=
+DB_PASS=
+DB_HOST=
+DB_NAME=
+DB_PORT=
+
+JWT_SECRET=
 ```
 
 5. Inicia el servidor
