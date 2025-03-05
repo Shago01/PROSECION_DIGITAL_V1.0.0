@@ -17,7 +17,7 @@ export class NazarenoRequest implements NazarenoCreation {
   middleName?: string | undefined;
   firstLastName!: string;
   secondLastName!: string;
-  birthdate!: Date;
+  birthdate!: string;
   email?: string | undefined;
   phoneNumber!: string;
   address!: string;

@@ -9,4 +9,12 @@ interface ApiResponse<T> {
   data: Data<T>;
 }
 
-export { ApiResponse };
+export interface PaginationData<T> {
+  cotent: Data<T>;
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
+export { ApiResponse, PaginationData };

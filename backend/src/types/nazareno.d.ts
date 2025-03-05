@@ -10,7 +10,7 @@ interface Nazareno {
   firstLastName: string;
   secondLastName: string;
   age: number;
-  birthdate: Date;
+  birthdate: string;
   email?: string;
   phoneNumber: string;
   address: string;

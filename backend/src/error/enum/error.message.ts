@@ -51,6 +51,7 @@ export enum ErrorMessage {
   ALREADY_EXISTS = 'El recurso ya existe.',
   UNMODIFIABLE_RESOURCE = 'El recurso no puede ser modificado.',
   LAST_ROOT = 'No puedes eliminar el único usuario ROOT.',
+  MODEL_NOT_FOUND = 'El modelo solicitado no se encuentra disponible.',
 
   // ⚠️ Request Errors
   BAD_REQUEST = 'Solicitud incorrecta.',

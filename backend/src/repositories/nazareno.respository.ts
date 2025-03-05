@@ -1,20 +1,27 @@
-import { models } from '@database/setup.db';
-import NazarenoRequest from '@dto/nazareno.dto';
-import AppError from '@erros/appError';
-import { ErrorMessage } from '@erros/enum/error.message';
+import { NameModel } from '@database/utils/enum/nameModles';
+import validateModel from '@database/utils/validate.models';
+import { NazarenoRequest } from '@dto/nazareno.dto';
 
 class NazarenoRepository {
   constructor() {}
 
+  async getAllNazarenosWhitCount(limit: number, offset: number) {
+    const Nazareno = validateModel(NameModel.NAZARENO);
+    return await Nazareno.findAndCountAll({
+      limit,
+      offset,
+      order: [['createdAt', 'DESC']],
+    });
+  }
+
   async NazarenoSave(nazareno: NazarenoRequest) {
-    const { Nazareno } = models;
-    if (!nazareno) throw new AppError(ErrorMessage.SERVER_ERROR, 500);
-    return await Nazareno?.create(nazareno as any);
+    const Nazareno = validateModel(NameModel.NAZARENO);
+    return await Nazareno.create(nazareno as any);
   }
 
   async NazarenoFindDocumenNumber(documentNumber: string) {
-    const { Nazareno } = models;
-    return await Nazareno?.findOne({ where: { documentNumber } });
+    const Nazareno = validateModel(NameModel.NAZARENO);
+    return await Nazareno.findOne({ where: { documentNumber } });
   }
 }
 

@@ -1,7 +1,7 @@
 enum rol {
   ADMIN = 'admin',
   SUPERVISOR = 'supervisor',
-  REGISTER = 'registrador',
+  REGISTER = 'register',
   ROOT = 'root',
 }
 

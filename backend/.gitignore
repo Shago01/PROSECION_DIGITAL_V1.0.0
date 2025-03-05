@@ -6,3 +6,6 @@ node_modules
 
 # innorar las varialbes de entorno de pruebas
 .env.test
+
+# directorio de codigo que precarga datos
+src/seeders/predata.ts

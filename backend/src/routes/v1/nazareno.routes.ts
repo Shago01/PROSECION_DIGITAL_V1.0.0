@@ -6,11 +6,19 @@ import { Router } from 'express';
 
 const nazarenoRoutes = Router();
 
+nazarenoRoutes.use(verifyToken);
+
 nazarenoRoutes.post(
   '/',
-  verifyToken,
   verifyRol([rol.REGISTER]),
   nazarenoController.createNazareno,
+);
+
+// TODO: Añadir el rol Consultor cuando se tenga
+nazarenoRoutes.get(
+  '/',
+  verifyRol([rol.REGISTER]),
+  nazarenoController.getAllNazarenos,
 );
 
 export default nazarenoRoutes;
