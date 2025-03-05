@@ -13,6 +13,13 @@ class NazarenoService {
       throw new AppError(ErrorMessage.ALREADY_EXISTS, 409);
     return await nazarenoRespository.NazarenoSave(data);
   }
+
+  async getAllNazarenoWhitPagination(limit: number, offset: number) {
+    console.log(limit, offset);
+
+    if (!limit) throw new AppError(ErrorMessage.BAD_REQUEST, 400);
+    return await nazarenoRespository.getAllNazarenosWhitCount(limit, offset);
+  }
 }
 
 export default new NazarenoService();

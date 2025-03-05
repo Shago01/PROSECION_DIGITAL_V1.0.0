@@ -1,8 +1,9 @@
+import { NameModel } from '@database/utils/enum/nameModles';
 import { ErrorMessage } from '@erros/enum/error.message';
 import { DataTypes, Sequelize } from 'sequelize';
 
 export default (sequelize: Sequelize) => {
-  sequelize.define('Nazareno', {
+  sequelize.define(NameModel.NAZARENO, {
     code: {
       type: DataTypes.STRING(),
       primaryKey: true,
