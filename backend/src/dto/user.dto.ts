@@ -50,8 +50,15 @@ export class UserRequest implements UserCreation {
     }
   }
 
+  // TODO: CORREGIR ESTA FUNCIÓN PARA QUE SE RECARGUE DE FORMA DINAICA LOS ROLES EN EL SISTEMA
   validateRol(rol: string) {
-    const validRoles: UserRol[] = ['admin', 'root', 'register', 'supervisor'];
+    const validRoles: UserRol[] = [
+      'admin',
+      'root',
+      'register',
+      'supervisor',
+      'consultant',
+    ];
     if (!validRoles.includes(rol as UserRol)) {
       this.addError(ErrorMessage.INVALID_ROLE);
     }

@@ -1,6 +1,8 @@
 import { UUID } from 'crypto';
 
-type UserRol = 'admin' | 'root' | 'register' | 'supervisor';
+// TODO: MODIFICAR PARA PARA QUE SE PUEDA AÑDAIR NUEVO ROLES Y ESTOS SEAN CARGADOS DE FORMA DINAICA
+
+type UserRol = 'admin' | 'root' | 'register' | 'supervisor' | 'consultant';
 
 type Token = string;
 

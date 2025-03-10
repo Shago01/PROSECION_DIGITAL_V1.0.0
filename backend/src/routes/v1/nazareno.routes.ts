@@ -14,10 +14,15 @@ nazarenoRoutes.post(
   nazarenoController.createNazareno,
 );
 
-// TODO: Añadir el rol Consultor cuando se tenga
 nazarenoRoutes.get(
   '/',
-  verifyRol([rol.REGISTER]),
+  verifyRol([
+    rol.ADMIN,
+    rol.REGISTER,
+    rol.ROOT,
+    rol.SUPERVISOR,
+    rol.CONSULTANT,
+  ]),
   nazarenoController.getAllNazarenos,
 );
 

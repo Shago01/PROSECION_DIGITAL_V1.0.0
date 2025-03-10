@@ -1,5 +1,6 @@
 import { NameModel } from '@database/utils/enum/nameModles';
 import { ErrorMessage } from '@erros/enum/error.message';
+import rol from '@utils/enum/rols.enum';
 import { Sequelize, DataTypes, UUID, UUIDV4 } from 'sequelize';
 
 export default (sequelize: Sequelize) => {
@@ -32,7 +33,7 @@ export default (sequelize: Sequelize) => {
       allowNull: false,
     },
     rol: {
-      type: new DataTypes.ENUM('admin', 'root', 'register', 'supervisor'),
+      type: new DataTypes.ENUM(...Object.values(rol)),
       allowNull: false,
     },
   });
