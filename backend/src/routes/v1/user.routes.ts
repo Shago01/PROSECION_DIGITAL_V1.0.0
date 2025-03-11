@@ -33,4 +33,10 @@ userRoutes.delete(
   userController.deleteUser,
 );
 
+userRoutes.get(
+  "/",
+  verifyRol([rol.ROOT, rol.ADMIN, rol.SUPERVISOR]),
+  userController.getAllUsers,
+)
+
 export default userRoutes;

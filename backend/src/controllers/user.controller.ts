@@ -52,6 +52,18 @@ class UserController {
       next(err);
     }
   }
+
+  async getAllUsers(
+    {query}: Request,
+    res: Response,
+    next: NextFunction
+  ){
+    try{
+
+    }catch(err){
+      
+    }
+  }
 }
 
 export default new UserController();
