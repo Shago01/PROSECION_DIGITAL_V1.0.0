@@ -1,7 +1,7 @@
-import { rol } from '@contracts/user';
 import nazarenoController from '@controllers/nazareno.controller';
 import { verifyRol } from '@middlewares/verifyRol';
 import verifyToken from '@middlewares/verifyToken';
+import { Rol } from '@utils/enum/userRols';
 import { Router } from 'express';
 
 const nazarenoRoutes = Router();
@@ -10,18 +10,18 @@ nazarenoRoutes.use(verifyToken);
 
 nazarenoRoutes.post(
   '/',
-  verifyRol([rol.REGISTER]),
+  verifyRol([Rol.REGISTER]),
   nazarenoController.createNazareno,
 );
 
 nazarenoRoutes.get(
   '/',
   verifyRol([
-    rol.ADMIN,
-    rol.REGISTER,
-    rol.ROOT,
-    rol.SUPERVISOR,
-    rol.CONSULTANT,
+    Rol.ADMIN,
+    Rol.REGISTER,
+    Rol.ROOT,
+    Rol.SUPERVISOR,
+    Rol.CONSULTANT,
   ]),
   nazarenoController.getAllNazarenos,
 );

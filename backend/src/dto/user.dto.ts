@@ -1,6 +1,13 @@
-import { rol, UserCreation, UserLogin, UserRol } from '@contracts/user';
+import {
+  UserCreation,
+  UserLogin,
+  UserResponseI,
+  UserRol,
+} from '@contracts/user';
 import AppError from '@erros/appError';
 import { ErrorMessage } from '@erros/enum/error.message';
+import { Rol } from '@utils/enum/userRols';
+import { UUID } from 'crypto';
 
 export class UserRequest implements UserCreation {
   name!: string;
@@ -51,7 +58,7 @@ export class UserRequest implements UserCreation {
   }
 
   validateRol(rolUserReq: string) {
-    if (!Object.values(rol).includes(rolUserReq as rol)) {
+    if (!Object.values(Rol).includes(rolUserReq as Rol)) {
       this.addError(ErrorMessage.INVALID_ROLE);
     }
   }
@@ -62,19 +69,17 @@ export class UserRequest implements UserCreation {
   }
 }
 
-export class UserResponse implements UserResponse {
-  id!: string;
+export class UserResponse implements UserResponseI {
+  id!: UUID;
   name!: string;
   email!: string;
-  username!: string;
   rol!: UserRol;
 
-  constructor({ email, id, name, rol, username }: UserResponse) {
+  constructor({ email, id, name, rol }: UserResponse) {
     this.email = email;
     this.id = id;
     this.name = name;
     this.rol = rol;
-    this.username = username;
   }
 }
 

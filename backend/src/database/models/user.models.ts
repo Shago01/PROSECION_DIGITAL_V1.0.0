@@ -1,6 +1,6 @@
-import { rol } from '@contracts/user';
 import { NameModel } from '@database/utils/enum/nameModles';
 import { ErrorMessage } from '@erros/enum/error.message';
+import { Rol } from '@utils/enum/userRols';
 import { DataTypes, Sequelize, UUID, UUIDV4 } from 'sequelize';
 
 export default (sequelize: Sequelize) => {
@@ -33,7 +33,7 @@ export default (sequelize: Sequelize) => {
       allowNull: false,
     },
     rol: {
-      type: new DataTypes.ENUM(...Object.values(rol)),
+      type: new DataTypes.ENUM(...Object.values(Rol)),
       allowNull: false,
     },
   });
