@@ -1,6 +1,14 @@
 import { UUID } from 'crypto';
 
-type UserRol = 'admin' | 'root' | 'register' | 'supervisor';
+enum rol {
+  ADMIN = 'admin',
+  SUPERVISOR = 'supervisor',
+  REGISTER = 'register',
+  ROOT = 'root',
+  CONSULTANT = 'consultant',
+}
+
+type UserRol = `${rol}`;
 
 type Token = string;
 
@@ -29,4 +37,5 @@ export {
   UserPyloadJWT,
   UserResponse,
   UserRol,
+  rol,
 };

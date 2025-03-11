@@ -1,4 +1,4 @@
-import { UserCreation, UserLogin, UserRol } from '@contracts/user';
+import { rol, UserCreation, UserLogin, UserRol } from '@contracts/user';
 import AppError from '@erros/appError';
 import { ErrorMessage } from '@erros/enum/error.message';
 
@@ -50,9 +50,8 @@ export class UserRequest implements UserCreation {
     }
   }
 
-  validateRol(rol: string) {
-    const validRoles: UserRol[] = ['admin', 'root', 'register', 'supervisor'];
-    if (!validRoles.includes(rol as UserRol)) {
+  validateRol(rolUserReq: string) {
+    if (!Object.values(rol).includes(rolUserReq as rol)) {
       this.addError(ErrorMessage.INVALID_ROLE);
     }
   }

@@ -12,8 +12,6 @@ const DB_NAME_TEST = process.env['DB_NAME'];
 let conn: Sequelize;
 let appTest: Express;
 
-//TODO: Hacer una inyección de dependencia de la instancia de sequelize
-
 // * Se instancia mocks y conneciones generales para las pruebas
 
 async function connectDBTest() {
