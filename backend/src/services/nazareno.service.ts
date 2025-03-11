@@ -6,6 +6,20 @@ import nazarenoRespository from '@repositories/nazareno.respository';
 class NazarenoService {
   constructor() {}
 
+  async getNazarenoByDocumenNumber(documentNumber: string) {
+    const nazDb = await nazarenoRespository.NazarenoFindDocumenNumber(
+      documentNumber,
+    );
+    if (!nazDb) throw new AppError(ErrorMessage.NOT_FOUND);
+    return nazDb;
+  }
+
+  async getNazarenoBycode(code: string) {
+    const nazDb = await nazarenoRespository.NazarenoFindCode(code);
+    if (!nazDb) throw new AppError(ErrorMessage.NOT_FOUND);
+    return nazDb;
+  }
+
   async createNazareno(data: NazarenoRequest) {
     if (
       await nazarenoRespository.NazarenoFindDocumenNumber(data.documentNumber)
