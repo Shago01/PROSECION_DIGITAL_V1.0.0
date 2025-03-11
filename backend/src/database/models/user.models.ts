@@ -1,6 +1,7 @@
 import { NameModel } from '@database/utils/enum/nameModles';
 import { ErrorMessage } from '@erros/enum/error.message';
-import { Sequelize, DataTypes, UUID, UUIDV4 } from 'sequelize';
+import { Rol } from '@utils/enum/userRols';
+import { DataTypes, Sequelize, UUID, UUIDV4 } from 'sequelize';
 
 export default (sequelize: Sequelize) => {
   const User = sequelize.define(NameModel.USER, {
@@ -32,7 +33,7 @@ export default (sequelize: Sequelize) => {
       allowNull: false,
     },
     rol: {
-      type: new DataTypes.ENUM('admin', 'root', 'register', 'supervisor'),
+      type: new DataTypes.ENUM(...Object.values(Rol)),
       allowNull: false,
     },
   });

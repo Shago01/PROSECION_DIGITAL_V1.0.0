@@ -29,6 +29,10 @@ class UserRepository {
     const User = validateModel(NameModel.USER);
     return await User.count({ where: { rol } });
   }
+  async getAllUsersWhitPagination (limit: number, offset: number) {
+    const User = validateModel(NameModel.USER);
+    return await User.findAndCountAll({ limit, offset });
+  }
 }
 
 export default new UserRepository();

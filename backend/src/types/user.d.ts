@@ -1,6 +1,7 @@
+import { Rol } from '@utils/enum/userRols';
 import { UUID } from 'crypto';
 
-type UserRol = 'admin' | 'root' | 'register' | 'supervisor';
+type UserRol = `${Rol}`;
 
 type Token = string;
 
@@ -19,7 +20,7 @@ type UserLogin = Pick<User, 'username' | 'password'>;
 
 type UserPyloadJWT = Pick<User, 'id' | 'username' | 'rol'>;
 
-type UserResponse = Omit<User, 'password'>;
+type UserResponseI = Omit<User, 'password' | 'username'>;
 
 export {
   Token,
@@ -27,6 +28,6 @@ export {
   UserCreation,
   UserLogin,
   UserPyloadJWT,
-  UserResponse,
+  UserResponseI,
   UserRol,
 };

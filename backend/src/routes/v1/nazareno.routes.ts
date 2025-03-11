@@ -1,7 +1,7 @@
 import nazarenoController from '@controllers/nazareno.controller';
 import { verifyRol } from '@middlewares/verifyRol';
 import verifyToken from '@middlewares/verifyToken';
-import rol from '@utils/enum/rols.enum';
+import { Rol } from '@utils/enum/userRols';
 import { Router } from 'express';
 
 const nazarenoRoutes = Router();
@@ -10,14 +10,19 @@ nazarenoRoutes.use(verifyToken);
 
 nazarenoRoutes.post(
   '/',
-  verifyRol([rol.REGISTER]),
+  verifyRol([Rol.REGISTER]),
   nazarenoController.createNazareno,
 );
 
-// TODO: Añadir el rol Consultor cuando se tenga
 nazarenoRoutes.get(
   '/',
-  verifyRol([rol.REGISTER]),
+  verifyRol([
+    Rol.ADMIN,
+    Rol.REGISTER,
+    Rol.ROOT,
+    Rol.SUPERVISOR,
+    Rol.CONSULTANT,
+  ]),
   nazarenoController.getAllNazarenos,
 );
 
