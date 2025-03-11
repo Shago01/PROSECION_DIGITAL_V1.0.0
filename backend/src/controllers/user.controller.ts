@@ -1,8 +1,10 @@
+import { PaginationData } from '@contracts/apiResponse';
 import type { ResAuth } from '@contracts/resAuth';
 import type { Token } from '@contracts/user';
 import { LoginUser, UserRequest, UserResponse } from '@dto/user.dto';
 import userService from '@services/user.service';
 import { successMessage } from '@utils/enum/succes.message';
+import { calculateTotalPages, paginationParams } from '@utils/pagination';
 import successResponse from '@utils/succesresponse';
 import { NextFunction, Request, Response } from 'express';
 
@@ -58,12 +60,28 @@ class UserController {
     res: Response,
     next: NextFunction
   ){
-    try{
-
-    }catch(err){
-      
+      try {
+        const { page, limit, offset } =  paginationParams(query);
+        const { rows, count } =
+          await userService.getAllUsersWhitPagination(limit, offset);
+  
+        const usersRes = rows.map(
+          user => new UserResponse(user.dataValues),
+        );
+  
+        const DataResponse: PaginationData<UserResponse[]> = {
+          cotent: usersRes,
+          total: count,
+          limit,
+          page,
+          totalPages: calculateTotalPages(count, limit),
+        };
+  
+        successResponse(res, DataResponse, successMessage.FETCHED_ALL);
+      } catch (error) {
+        next(error);
+      }
     }
-  }
 }
 
 export default new UserController();

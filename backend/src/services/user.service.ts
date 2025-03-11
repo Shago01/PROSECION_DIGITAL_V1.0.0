@@ -60,6 +60,10 @@ class UserService {
     if (![rol.ADMIN, rol.ROOT].includes(rolReq as rol))
       throw new AppError(ErrorMessage.FORBIDDEN, 403);
   }
+
+  async getAllUsersWhitPagination(limit: number, offset: number) {
+    return await userRespository.getAllUsersWhitPagination(limit, offset);
+  }  
 }
 
 export default new UserService();
