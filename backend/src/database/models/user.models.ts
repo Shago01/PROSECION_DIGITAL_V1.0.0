@@ -1,7 +1,7 @@
+import { rol } from '@contracts/user';
 import { NameModel } from '@database/utils/enum/nameModles';
 import { ErrorMessage } from '@erros/enum/error.message';
-import rol from '@utils/enum/rols.enum';
-import { Sequelize, DataTypes, UUID, UUIDV4 } from 'sequelize';
+import { DataTypes, Sequelize, UUID, UUIDV4 } from 'sequelize';
 
 export default (sequelize: Sequelize) => {
   const User = sequelize.define(NameModel.USER, {

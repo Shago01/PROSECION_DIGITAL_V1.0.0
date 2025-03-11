@@ -1,7 +1,7 @@
+import { rol } from '@contracts/user';
 import nazarenoController from '@controllers/nazareno.controller';
 import { verifyRol } from '@middlewares/verifyRol';
 import verifyToken from '@middlewares/verifyToken';
-import rol from '@utils/enum/rols.enum';
 import { Router } from 'express';
 
 const nazarenoRoutes = Router();

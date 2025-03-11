@@ -1,8 +1,14 @@
 import { UUID } from 'crypto';
 
-// TODO: MODIFICAR PARA PARA QUE SE PUEDA AÑDAIR NUEVO ROLES Y ESTOS SEAN CARGADOS DE FORMA DINAICA
+enum rol {
+  ADMIN = 'admin',
+  SUPERVISOR = 'supervisor',
+  REGISTER = 'register',
+  ROOT = 'root',
+  CONSULTANT = 'consultant',
+}
 
-type UserRol = 'admin' | 'root' | 'register' | 'supervisor' | 'consultant';
+type UserRol = `${rol}`;
 
 type Token = string;
 
@@ -31,4 +37,5 @@ export {
   UserPyloadJWT,
   UserResponse,
   UserRol,
+  rol,
 };

@@ -1,9 +1,8 @@
-import { UserPyloadJWT, UserRol } from '@contracts/user';
+import { rol, UserPyloadJWT, UserRol } from '@contracts/user';
 import { LoginUser, UserRequest } from '@dto/user.dto';
 import AppError from '@erros/appError';
 import { ErrorMessage } from '@erros/enum/error.message';
 import userRespository from '@repositories/user.respository';
-import rol from '@utils/enum/rols.enum';
 import { jwtResolve } from '@utils/jwtresolve';
 import bcrypt from 'bcrypt';
 
