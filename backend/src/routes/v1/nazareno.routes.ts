@@ -8,10 +8,22 @@ const nazarenoRoutes = Router();
 
 nazarenoRoutes.use(verifyToken);
 
+nazarenoRoutes.put(
+  '/reset',
+  verifyRol([Rol.ADMIN, Rol.ROOT]),
+  nazarenoController.resetActiveAllNazareno,
+);
+
 nazarenoRoutes.post(
   '/',
   verifyRol([Rol.REGISTER]),
   nazarenoController.createNazareno,
+);
+
+nazarenoRoutes.patch(
+  '/active/:code',
+  verifyRol([Rol.REGISTER]),
+  nazarenoController.updateNazarenoStatus,
 );
 
 nazarenoRoutes.use(
