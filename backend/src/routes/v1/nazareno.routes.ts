@@ -14,8 +14,7 @@ nazarenoRoutes.post(
   nazarenoController.createNazareno,
 );
 
-nazarenoRoutes.get(
-  '/',
+nazarenoRoutes.use(
   verifyRol([
     Rol.ADMIN,
     Rol.REGISTER,
@@ -23,7 +22,10 @@ nazarenoRoutes.get(
     Rol.SUPERVISOR,
     Rol.CONSULTANT,
   ]),
-  nazarenoController.getAllNazarenos,
 );
+
+nazarenoRoutes.get('/query', nazarenoController.getAllNazarenos);
+nazarenoRoutes.get('/by-code/:code', nazarenoController.getByCode);
+nazarenoRoutes.get('/by-doc/:doc', nazarenoController.getByDocumenNumber);
 
 export default nazarenoRoutes;

@@ -1,5 +1,7 @@
 import { PaginationData } from '@contracts/apiResponse';
 import { NazarenoRequest, NazarenoResponse } from '@dto/nazareno.dto';
+import AppError from '@erros/appError';
+import { ErrorMessage } from '@erros/enum/error.message';
 import nazarenoService from '@services/nazareno.service';
 import { successMessage } from '@utils/enum/succes.message';
 import { calculateTotalPages, paginationParams } from '@utils/pagination';
@@ -8,6 +10,37 @@ import { NextFunction, Request, Response } from 'express';
 
 class nazarenoController {
   constructor() {}
+
+  async getByDocumenNumber(
+    { params }: Request,
+    res: Response,
+    nex: NextFunction,
+  ) {
+    try {
+      const { doc } = params;
+      if (!doc) throw new AppError(ErrorMessage.BAD_REQUEST, 400);
+      const data = (await nazarenoService.getNazarenoByDocumenNumber(doc))
+        .dataValues;
+      const dataResponse = new NazarenoResponse(data);
+
+      successResponse(res, dataResponse, successMessage.FETCHED);
+    } catch (error) {
+      nex(error);
+    }
+  }
+
+  async getByCode({ params }: Request, res: Response, nex: NextFunction) {
+    try {
+      const { code } = params;
+      if (!code) throw new AppError(ErrorMessage.BAD_REQUEST, 400);
+      const data = (await nazarenoService.getNazarenoBycode(code)).dataValues;
+      const dataResponse = new NazarenoResponse(data);
+
+      successResponse(res, dataResponse, successMessage.FETCHED);
+    } catch (error) {
+      nex(error);
+    }
+  }
 
   public async createNazareno(
     { body }: Request,

@@ -23,6 +23,11 @@ class NazarenoRepository {
     const Nazareno = validateModel(NameModel.NAZARENO);
     return await Nazareno.findOne({ where: { documentNumber } });
   }
+
+  async NazarenoFindCode(code: string) {
+    const Nazareno = validateModel(NameModel.NAZARENO);
+    return await Nazareno.findOne({ where: { code } });
+  }
 }
 
 export default new NazarenoRepository();

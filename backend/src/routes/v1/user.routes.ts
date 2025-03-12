@@ -17,6 +17,6 @@ userRoutes.post('/newUser', hashPasswordMiddlware, userController.singUser);
 
 userRoutes.delete('/:id', userController.deleteUser);
 
-userRoutes.get('/', userController.getAllUsers);
+userRoutes.get('/query', userController.getAllUsers);
 
 export default userRoutes;
