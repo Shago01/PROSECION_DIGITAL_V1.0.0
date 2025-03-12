@@ -6,31 +6,45 @@ import nazarenoRespository from '@repositories/nazareno.respository';
 class NazarenoService {
   constructor() {}
 
+  async resetAllActiveNazarenos() {
+    return await nazarenoRespository.resetAllActiveNazarenos();
+  }
+
+  async updateNazarenoStatus(code: string) {
+    const nazDb = await nazarenoRespository.NazarenoFindCode(code);
+
+    if (!nazDb) throw new AppError(ErrorMessage.NOT_FOUND, 404);
+    if (nazDb.active) throw new AppError(ErrorMessage.NAZARENOS_IS_ACTIVE, 409);
+
+    nazDb.active = true;
+    nazDb.yearsActive += 1;
+
+    return nazarenoRespository.save(nazDb);
+  }
+
   async getNazarenoByDocumenNumber(documentNumber: string) {
     const nazDb = await nazarenoRespository.NazarenoFindDocumenNumber(
       documentNumber,
     );
-    if (!nazDb) throw new AppError(ErrorMessage.NOT_FOUND);
+    if (!nazDb) throw new AppError(ErrorMessage.NOT_FOUND, 404);
     return nazDb;
   }
 
   async getNazarenoBycode(code: string) {
     const nazDb = await nazarenoRespository.NazarenoFindCode(code);
-    if (!nazDb) throw new AppError(ErrorMessage.NOT_FOUND);
+    if (!nazDb) throw new AppError(ErrorMessage.NOT_FOUND, 404);
     return nazDb;
   }
 
   async createNazareno(data: NazarenoRequest) {
-    if (
-      await nazarenoRespository.NazarenoFindDocumenNumber(data.documentNumber)
-    )
-      throw new AppError(ErrorMessage.ALREADY_EXISTS, 409);
+    const nazdb = await nazarenoRespository.NazarenoFindDocumenNumber(
+      data.documentNumber,
+    );
+    if (!nazdb) throw new AppError(ErrorMessage.ALREADY_EXISTS, 409);
     return await nazarenoRespository.NazarenoSave(data);
   }
 
   async getAllNazarenoWhitPagination(limit: number, offset: number) {
-    console.log(limit, offset);
-
     if (!limit) throw new AppError(ErrorMessage.BAD_REQUEST, 400);
     return await nazarenoRespository.getAllNazarenosWhitCount(limit, offset);
   }

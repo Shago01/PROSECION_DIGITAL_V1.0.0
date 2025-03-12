@@ -11,6 +11,37 @@ import { NextFunction, Request, Response } from 'express';
 class nazarenoController {
   constructor() {}
 
+  async resetActiveAllNazareno(
+    _req: Request,
+    res: Response,
+    nex: NextFunction,
+  ) {
+    try {
+      const total = await nazarenoService.resetAllActiveNazarenos();
+      successResponse(res, total, successMessage.UPDATED);
+    } catch (error) {
+      nex(error);
+    }
+  }
+
+  async updateNazarenoStatus(
+    { params }: Request,
+    res: Response,
+    nex: NextFunction,
+  ) {
+    try {
+      const { code } = params;
+      if (!code) throw new AppError(ErrorMessage.BAD_REQUEST, 400);
+      const dataDB = (await nazarenoService.updateNazarenoStatus(code))
+        .dataValues;
+      const dataResponse = new NazarenoResponse(dataDB);
+
+      successResponse(res, dataResponse, successMessage.UPDATED);
+    } catch (error) {
+      nex(error);
+    }
+  }
+
   async getByDocumenNumber(
     { params }: Request,
     res: Response,
@@ -50,8 +81,9 @@ class nazarenoController {
     try {
       const data = new NazarenoRequest(body);
       const dataResponse = (await nazarenoService.createNazareno(data))
-        ?.dataValues;
+        .dataValues;
       const response = new NazarenoResponse(dataResponse);
+
       successResponse(res, response, successMessage.CREATED);
     } catch (error) {
       nex(error);

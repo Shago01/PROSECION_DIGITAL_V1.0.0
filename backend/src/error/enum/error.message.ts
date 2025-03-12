@@ -52,6 +52,7 @@ export enum ErrorMessage {
   UNMODIFIABLE_RESOURCE = 'El recurso no puede ser modificado.',
   LAST_ROOT = 'No puedes eliminar el único usuario ROOT.',
   MODEL_NOT_FOUND = 'El modelo solicitado no se encuentra disponible.',
+  NAZARENOS_IS_ACTIVE = 'El nazareno ya se encuentra activo para este año',
 
   // ⚠️ Request Errors
   BAD_REQUEST = 'Solicitud incorrecta.',

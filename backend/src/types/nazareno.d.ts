@@ -1,3 +1,5 @@
+import { Model } from 'sequelize';
+
 type DocumentType = 'CC' | 'CE' | 'TI';
 type Sex = 'M' | 'F';
 
@@ -22,6 +24,8 @@ interface Nazareno {
   yearsActive: number;
 }
 
+interface NazarenoModel extends Model<Nazareno>, Nazareno {}
+
 type NazarenoCreation = Omit<
   Nazareno,
   'age' | 'code' | 'yearsActive' | 'active'
@@ -39,6 +43,7 @@ export {
   DocumentType,
   Nazareno,
   NazarenoCreation,
+  NazarenoModel,
   NazarenoResponse,
   ResNazareno,
   Sex,
