@@ -6,6 +6,12 @@ import nazarenoRespository from '@repositories/nazareno.respository';
 class NazarenoService {
   constructor() {}
 
+  async getBasicAnalitics() {
+    const stats = await nazarenoRespository.getBasicAnalitics();
+    if (!stats) throw new AppError(ErrorMessage.SERVER_ERROR);
+    return stats;
+  }
+
   async resetAllActiveNazarenos() {
     return await nazarenoRespository.resetAllActiveNazarenos();
   }

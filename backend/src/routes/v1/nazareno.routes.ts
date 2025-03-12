@@ -14,6 +14,12 @@ nazarenoRoutes.put(
   nazarenoController.resetActiveAllNazareno,
 );
 
+nazarenoRoutes.get(
+  '/analytics',
+  verifyRol([Rol.ADMIN, Rol.ROOT]),
+  nazarenoController.getBasicAnalitics,
+);
+
 nazarenoRoutes.post(
   '/',
   verifyRol([Rol.REGISTER]),

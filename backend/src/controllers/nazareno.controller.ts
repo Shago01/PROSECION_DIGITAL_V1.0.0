@@ -11,6 +11,15 @@ import { NextFunction, Request, Response } from 'express';
 class nazarenoController {
   constructor() {}
 
+  async getBasicAnalitics(_req: Request, res: Response, nex: NextFunction) {
+    try {
+      const data = await nazarenoService.getBasicAnalitics();
+      successResponse(res, data, successMessage.FETCHED);
+    } catch (error) {
+      nex(error);
+    }
+  }
+
   async resetActiveAllNazareno(
     _req: Request,
     res: Response,
