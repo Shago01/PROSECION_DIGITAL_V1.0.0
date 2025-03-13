@@ -11,6 +11,35 @@ import { NextFunction, Request, Response } from 'express';
 class nazarenoController {
   constructor() {}
 
+  async getNazarenoExcel(_req: Request, res: Response, nex: NextFunction) {
+    try {
+      const nazarenoBook = await nazarenoService.getJsonToExcelData();
+      res.setHeader(
+        'Content-Disposition',
+        'attachment; filename=nazarenos.xlsx',
+      );
+      res.setHeader(
+        'Content-Type',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      );
+
+      console.log(nazarenoBook);
+
+      res.send(nazarenoBook);
+    } catch (error) {
+      nex(error);
+    }
+  }
+
+  async getBasicAnalitics(_req: Request, res: Response, nex: NextFunction) {
+    try {
+      const data = await nazarenoService.getBasicAnalitics();
+      successResponse(res, data, successMessage.FETCHED);
+    } catch (error) {
+      nex(error);
+    }
+  }
+
   async resetActiveAllNazareno(
     _req: Request,
     res: Response,

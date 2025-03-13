@@ -2,13 +2,63 @@ import { NazarenoModel } from '@contracts/nazareno';
 import { NameModel } from '@database/utils/enum/nameModles';
 import validateModel from '@database/utils/validate.models';
 import { NazarenoRequest } from '@dto/nazareno.dto';
-import { Model } from 'sequelize';
+import { Model, Sequelize } from 'sequelize';
 
 class NazarenoRepository {
   constructor() {}
 
   async save(modelDb: Model<any, any>) {
     return await modelDb.save();
+  }
+
+  async getBasicAnalitics() {
+    const Nazareno = validateModel(NameModel.NAZARENO);
+    const stats = await Nazareno.findAll({
+      attributes: [
+        [Sequelize.fn('COUNT', Sequelize.col('code')), 'total'],
+        [
+          Sequelize.fn(
+            'SUM',
+            Sequelize.literal("CASE WHEN sex = 'F' THEN 1 ELSE 0 END"),
+          ),
+          'totalFem',
+        ],
+        [
+          Sequelize.fn(
+            'SUM',
+            Sequelize.literal("CASE WHEN sex = 'M' THEN 1 ELSE 0 END"),
+          ),
+          'totalMas',
+        ],
+        [
+          Sequelize.fn(
+            'SUM',
+            Sequelize.literal('CASE WHEN active = true THEN 1 ELSE 0 END'),
+          ),
+          'active',
+        ],
+        [
+          Sequelize.fn(
+            'SUM',
+            Sequelize.literal('CASE WHEN active = false THEN 1 ELSE 0 END'),
+          ),
+          'inactive',
+        ],
+      ],
+      raw: true,
+    });
+
+    return stats[0];
+  }
+
+  async getAll() {
+    const Nazareno = validateModel(NameModel.NAZARENO);
+    return await Nazareno.findAll({
+      raw: true,
+      attributes: {
+        exclude: ['createdAt', 'updatedAt'],
+      },
+    });
   }
 
   async resetAllActiveNazarenos() {

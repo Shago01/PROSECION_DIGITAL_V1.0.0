@@ -2,9 +2,21 @@ import type { NazarenoRequest } from '@dto/nazareno.dto';
 import AppError from '@erros/appError';
 import { ErrorMessage } from '@erros/enum/error.message';
 import nazarenoRespository from '@repositories/nazareno.respository';
+import { defineWorkBookExcel } from '@utils/defineWorkBookExcel';
 
 class NazarenoService {
   constructor() {}
+
+  async getJsonToExcelData() {
+    const data = await nazarenoRespository.getAll();
+    return defineWorkBookExcel(data);
+  }
+
+  async getBasicAnalitics() {
+    const stats = await nazarenoRespository.getBasicAnalitics();
+    if (!stats) throw new AppError(ErrorMessage.SERVER_ERROR);
+    return stats;
+  }
 
   async resetAllActiveNazarenos() {
     return await nazarenoRespository.resetAllActiveNazarenos();

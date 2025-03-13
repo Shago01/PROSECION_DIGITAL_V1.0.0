@@ -14,6 +14,18 @@ nazarenoRoutes.put(
   nazarenoController.resetActiveAllNazareno,
 );
 
+nazarenoRoutes.get(
+  '/analytics',
+  verifyRol([Rol.ADMIN, Rol.ROOT]),
+  nazarenoController.getBasicAnalitics,
+);
+
+nazarenoRoutes.get(
+  '/excelData',
+  verifyRol([Rol.ADMIN, Rol.ROOT]),
+  nazarenoController.getNazarenoExcel,
+);
+
 nazarenoRoutes.post(
   '/',
   verifyRol([Rol.REGISTER]),
