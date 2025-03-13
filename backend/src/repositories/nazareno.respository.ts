@@ -51,6 +51,16 @@ class NazarenoRepository {
     return stats[0];
   }
 
+  async getAll() {
+    const Nazareno = validateModel(NameModel.NAZARENO);
+    return await Nazareno.findAll({
+      raw: true,
+      attributes: {
+        exclude: ['createdAt', 'updatedAt'],
+      },
+    });
+  }
+
   async resetAllActiveNazarenos() {
     const Nazareno = validateModel(NameModel.NAZARENO);
     return await Nazareno.update(

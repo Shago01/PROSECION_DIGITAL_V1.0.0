@@ -20,6 +20,12 @@ nazarenoRoutes.get(
   nazarenoController.getBasicAnalitics,
 );
 
+nazarenoRoutes.get(
+  '/excelData',
+  verifyRol([Rol.ADMIN, Rol.ROOT]),
+  nazarenoController.getNazarenoExcel,
+);
+
 nazarenoRoutes.post(
   '/',
   verifyRol([Rol.REGISTER]),
