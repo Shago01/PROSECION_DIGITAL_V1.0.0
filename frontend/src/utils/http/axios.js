@@ -11,7 +11,7 @@ const axiosGetRequest = async (url, config) => {
   }
 };
 
-const axiosPostRequest = async (url, data, config) => {
+const axiosPostRequest = async (url, data, config = {}) => {
   try {
     const response = await axiosInstance.post(url, data, config);
     return response.data;
