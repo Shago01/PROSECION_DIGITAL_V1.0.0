@@ -12,7 +12,6 @@ const loadState = () => {
 };
 
 const preloadedState = loadState();
-console.log(preloadedState);
 
 const store = configureStore({
   reducer: {
