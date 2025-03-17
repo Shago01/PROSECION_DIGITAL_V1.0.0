@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { CiUser } from 'react-icons/ci';
 import { FaLock } from 'react-icons/fa';
+import useAuth from '../../hooks/auth/useAuth';
 
 export function FormLogin() {
   const [showPassword, setShowPassword] = useState(false);
@@ -10,10 +11,13 @@ export function FormLogin() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
+  const { loginUser } = useAuth();
 
   const onSubmit = data => {
-    console.log('Datos enviados:', data);
+    loginUser(data);
+    reset();
   };
 
   return (
