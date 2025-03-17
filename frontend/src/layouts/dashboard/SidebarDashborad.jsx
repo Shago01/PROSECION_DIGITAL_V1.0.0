@@ -1,6 +1,8 @@
-import { FiHome, FiLayers, FiSettings, FiLogOut } from 'react-icons/fi';
-import SidebarItem from '../../components/ui/SidebarItem';
+import { FaTable, FaUser } from 'react-icons/fa';
+import { FiHome, FiLogOut, FiSettings } from 'react-icons/fi';
+import { IoMdPersonAdd } from 'react-icons/io';
 import { SidebarDropdown } from '../../components/ui/SidebarDropdown';
+import SidebarItem from '../../components/ui/SidebarItem';
 import useAuth from '../../hooks/auth/useAuth';
 
 const styles = {
@@ -20,35 +22,42 @@ export function SidebarDashboard() {
       to: '/dashboard/home',
     },
     {
-      icon: FiLayers,
-      text: 'Categorías',
+      icon: FaUser,
+      text: 'Usuarios',
       style: `${styles.base} ${styles.primary}`,
       children: [
         {
-          icon: FiLayers,
-          text: 'Categorías A',
-          to: '/categorias/a',
+          icon: FaTable,
+          text: 'Tabla',
+          to: '/dashboard/user/tabla',
           style: `${styles.base} ${styles.primary}`,
         },
         {
-          icon: FiLayers,
-          text: 'Categorías B',
-          to: '/categorias/b',
-          style: `${styles.base} ${styles.primary}`,
-        },
-        {
-          icon: FiLayers,
-          text: 'Categorías C',
-          to: '/categorias/c',
+          icon: IoMdPersonAdd,
+          text: 'Registrar',
+          to: '/dashboard/user/register',
           style: `${styles.base} ${styles.primary}`,
         },
       ],
     },
     {
-      icon: FiSettings,
-      text: 'Configuración',
+      icon: FaUser,
+      text: 'Nazarenos',
       style: `${styles.base} ${styles.primary}`,
-      to: '/configuracion',
+      children: [
+        {
+          icon: FaTable,
+          text: 'Tabla',
+          to: '/dashboard/user/tabla',
+          style: `${styles.base} ${styles.primary}`,
+        },
+        {
+          icon: IoMdPersonAdd,
+          text: 'Registrar',
+          to: '/dashboard/user/register',
+          style: `${styles.base} ${styles.primary}`,
+        },
+      ],
     },
     {
       icon: FiLogOut,

@@ -11,7 +11,6 @@ import useFetch from '../../hooks/http/useFetch';
 
 function DashboardHome() {
   const { data, loading } = useFetch('/api/nazareno/analytics');
-  console.log(data);
 
   const card = loading ? (
     Array(6)
