@@ -4,37 +4,42 @@ const axiosInstance = axios.create();
 
 const axiosGetRequest = async (url, config) => {
   try {
-    const response = await axiosInstance.get(url, config);
-    return response.data;
-  } catch (err) {
-    console.error(err);
+    const response = (await axiosInstance.get(url, config)).data;
+    return [null, response];
+  } catch (error) {
+    const { data } = error.response;
+    return [data.err, null];
   }
 };
 
 const axiosPostRequest = async (url, data, config = {}) => {
   try {
-    const response = await axiosInstance.post(url, data, config);
-    return response.data;
-  } catch (err) {
-    console.error(err);
+    const response = (await axiosInstance.post(url, data, config)).data;
+    return [null, response];
+  } catch (error) {
+    const { data } = error.response;
+    return [data.err, null];
   }
 };
 
 const axiosPutRequest = async (url, data, config) => {
   try {
-    const response = await axiosInstance.put(url, data, config);
-    return response.data;
-  } catch (err) {
-    console.error(err);
+    const response = (await axiosInstance.put(url, data, config)).data;
+    return [null, response];
+  } catch (error) {
+    const { data } = error.response;
+    return [data.err, null];
   }
 };
 
 const axiosDeleteRequest = async (url, config) => {
   try {
-    const response = await axiosInstance.delete(url, config);
-    return response.data;
-  } catch (err) {
-    console.error(err);
+    const response = (await axiosInstance.delete(url, config)).data;
+    return [null, response];
+  } catch (error) {
+    const { data } = error.response;
+
+    return [data.err, null];
   }
 };
 
