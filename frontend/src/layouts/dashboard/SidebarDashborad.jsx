@@ -17,7 +17,7 @@ export function SidebarDashboard() {
       icon: FiHome,
       text: 'Inicio',
       style: `${styles.base} ${styles.primary}`,
-      to: '/dashboard',
+      to: '/dashboard/home',
     },
     {
       icon: FiLayers,
