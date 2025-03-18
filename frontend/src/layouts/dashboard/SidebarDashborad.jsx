@@ -71,7 +71,7 @@ export function SidebarDashboard() {
     <aside className="w-64 bg-white shadow-lg p-5">
       <h2 className="text-xl font-semibold text-gray-700 mb-6">Menú</h2>
       <nav>
-        <ul className="space-y-4">
+        <ul className="space-y-2 text-sm">
           {menuItems.map((item, i) =>
             item.children ? (
               <li key={i}>
