@@ -3,6 +3,7 @@ import { DashboardPage } from '../../pages/dashboard/DashboardPage';
 import LoginPage from '../../pages/LoginPage';
 import { ProtectedRoute } from './ProtectedRoute';
 import DashboardHome from '../../pages/dashboard/DashboradHome';
+import TableNazareno from '../../pages/dashboard/nazarenos/TableNazareno';
 
 export const AppRoutes = () => {
   return (
@@ -15,6 +16,8 @@ export const AppRoutes = () => {
         <Route path="/dashboard" element={<DashboardPage />}>
           <Route path="/dashboard/home" element={<DashboardHome />} />
           <Route path="/dashboard/users" element={<DashboardPage />} />
+          <Route path="/dashboard/naz/table" element={<TableNazareno />} />
+          <Route path="/dashboard/naz/register" />
         </Route>
       </Route>
 

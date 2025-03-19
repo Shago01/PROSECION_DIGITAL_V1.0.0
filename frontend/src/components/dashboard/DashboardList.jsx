@@ -2,8 +2,6 @@ import { SkeletonList } from '../skeleton/SkeletonList';
 import { NazarenoList } from '../ui/ScrollableList';
 
 export const DashboardList = ({ data, loading }) => {
-  console.log(data);
-
   if (loading) {
     return (
       <>

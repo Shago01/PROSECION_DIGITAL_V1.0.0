@@ -12,7 +12,7 @@ import { COLORS } from '../../utils/constants/colorhex';
 
 const NazarenoList = ({ users }) => {
   return (
-    <div className="max-h-72 overflow-y-auto p-3 scrollbar-hide rounded-xl">
+    <div className="max-h-72 overflow-y-auto scrollbar-hide rounded-xl">
       {users.length > 0 ? (
         users.map((item, index) => (
           <div
