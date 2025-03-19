@@ -48,7 +48,7 @@ export function SidebarDashboard() {
         {
           icon: FaTable,
           text: 'Tabla',
-          to: '/dashboard/user/tabla',
+          to: '/dashboard/naz/table',
           style: `${styles.base} ${styles.primary}`,
         },
         {
@@ -68,10 +68,10 @@ export function SidebarDashboard() {
   ];
 
   return (
-    <aside className="w-64 bg-white shadow-lg p-5">
+    <aside className="w-64 flex-shrink-0 bg-white shadow-lg p-5">
       <h2 className="text-xl font-semibold text-gray-700 mb-6">Menú</h2>
       <nav>
-        <ul className="space-y-4">
+        <ul className="space-y-2 text-sm">
           {menuItems.map((item, i) =>
             item.children ? (
               <li key={i}>

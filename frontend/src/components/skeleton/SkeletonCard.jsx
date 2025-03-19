@@ -1,16 +1,14 @@
 export function SkeletonCard() {
   return (
-    <div className="bg-white shadow-lg rounded-xl p-5 w-full border border-gray-300 animate-pulse">
-      {/* Sección superior */}
-      <div className="flex justify-between items-center">
-        <div className="w-24 h-8 bg-gray-300 rounded"></div>
-      </div>
+    <div className="bg-white shadow-md rounded-lg p-4 w-full border border-gray-200 animate-pulse">
+      <div className="flex items-center space-x-4">
+        <div className="w-12 h-12 flex items-center justify-center rounded-lg shadow bg-gray-300"></div>
 
-      {/* Sección central (valor principal) */}
-      <div className="mt-2 p-2">
-        <div className="h-4 bg-gray-300 rounded w-3/4 mb-2"></div>
-        <div className="h-8 bg-gray-400 rounded w-1/2 mb-2"></div>
-        <div className="h-4 bg-gray-300 rounded w-2/3"></div>
+        <div className="w-full">
+          <div className="h-4 bg-gray-300 rounded w-1/3 mb-2"></div>{' '}
+          <div className="h-6 bg-gray-400 rounded w-1/2 mb-2"></div>{' '}
+          <div className="h-3 bg-gray-300 rounded w-1/4"></div>{' '}
+        </div>
       </div>
     </div>
   );

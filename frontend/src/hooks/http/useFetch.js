@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { API_URL } from '../../config/configenv';
 import { axiosGetRequest } from '../../utils/http/axios';
 import { useSelector } from 'react-redux';
+import { ShowNotify } from '../../components/commons/shownotify';
 
 function useFetch(url) {
   const [data, setData] = useState(null);
@@ -23,6 +24,7 @@ function useFetch(url) {
         });
         if (err) throw err;
         if (isMounted) setData(response.data);
+        ShowNotify('success', `${response.message} ✅`);
       } catch (err) {
         if (isMounted) setError(err.message);
       } finally {
