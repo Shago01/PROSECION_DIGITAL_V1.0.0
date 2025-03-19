@@ -52,7 +52,7 @@ class NazarenoService {
     const nazdb = await nazarenoRespository.NazarenoFindDocumenNumber(
       data.documentNumber,
     );
-    if (!nazdb) throw new AppError(ErrorMessage.ALREADY_EXISTS, 409);
+    if (nazdb) throw new AppError(ErrorMessage.ALREADY_EXISTS, 409);
     return await nazarenoRespository.NazarenoSave(data);
   }
 

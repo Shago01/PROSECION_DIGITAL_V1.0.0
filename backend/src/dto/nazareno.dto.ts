@@ -26,10 +26,56 @@ export class NazarenoRequest implements NazarenoCreation {
   department!: string;
   errors: any[] | undefined = undefined;
 
-  constructor(data: NazarenoCreation) {
-    this.validateData(data);
+  constructor({
+    documentType,
+    sex,
+    documentNumber,
+    firstName,
+    middleName,
+    firstLastName,
+    secondLastName,
+    birthdate,
+    email,
+    phoneNumber,
+    address,
+    country,
+    city,
+    department,
+  }: NazarenoCreation) {
+    this.validateData({
+      documentType,
+      sex,
+      documentNumber,
+      firstName,
+      middleName,
+      firstLastName,
+      secondLastName,
+      birthdate,
+      email,
+      phoneNumber,
+      address,
+      country,
+      city,
+      department,
+    });
     this.code = generateCode();
-    Object.assign(this, data);
+
+    // Asignar valores a las propiedades
+    this.documentType = documentType;
+    this.sex = sex;
+    this.documentNumber = documentNumber;
+    this.firstName = firstName;
+    this.middleName = middleName;
+    this.firstLastName = firstLastName;
+    this.secondLastName = secondLastName;
+    this.birthdate = birthdate;
+    this.email = email;
+    this.phoneNumber = phoneNumber;
+    this.address = address;
+    this.country = country;
+    this.city = city;
+    this.department = department;
+
     if (!this.errors) delete this.errors;
   }
 
@@ -75,7 +121,7 @@ export class NazarenoRequest implements NazarenoCreation {
   }
 
   validateDocumentNumber(value: string) {
-    if (!/^\d{10}$/.test(value))
+    if (!/^\d{8,10}$/.test(value))
       this.addError(ErrorMessage.INVALID_DOCUMENT_NUMBER);
   }
 
