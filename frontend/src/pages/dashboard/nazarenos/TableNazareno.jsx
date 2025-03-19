@@ -6,7 +6,8 @@ import SkeletonTable from '../../../components/skeleton/SkeletonTable';
 import { axiosGetRequest } from '../../../utils/http/axios';
 import { API_URL } from '../../../config/configenv';
 import NazarenoSearchBar from './NazarenoSearchBar';
-import { nazarenoColumns, tableCustomStyles } from './NazarenoColumns';
+import { NazarenoColumns, tableCustomStyles } from './NazarenoColumns';
+import { FaSortUp } from 'react-icons/fa';
 
 function NazarenoTable() {
   const [page, setPage] = useState(1);
@@ -66,7 +67,7 @@ function NazarenoTable() {
 
       <DataTable
         title="Nazarenos Registrados"
-        columns={nazarenoColumns}
+        columns={NazarenoColumns}
         data={filteredData}
         pagination
         paginationServer

@@ -54,7 +54,7 @@ export function SidebarDashboard() {
         {
           icon: IoMdPersonAdd,
           text: 'Registrar',
-          to: '/dashboard/user/register',
+          to: '/dashboard/naz/register',
           style: `${styles.base} ${styles.primary}`,
         },
       ],

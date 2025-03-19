@@ -1,6 +1,5 @@
-import { FaEnvelope, FaLock } from 'react-icons/fa';
-import { FormLogin } from '../components/auth/FormLogin';
 import { Banner } from '../components/auth/Banner';
+import { FormLogin } from '../components/auth/FormLogin';
 
 function LoginPage() {
   return (
