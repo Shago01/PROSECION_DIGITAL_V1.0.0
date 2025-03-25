@@ -22,9 +22,6 @@ class nazarenoController {
         'Content-Type',
         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       );
-
-      console.log(nazarenoBook);
-
       res.send(nazarenoBook);
     } catch (error) {
       nex(error);

@@ -8,6 +8,18 @@ import { API_URL } from '../../../config/configenv';
 import NazarenoSearchBar from './NazarenoSearchBar';
 import { NazarenoColumns, tableCustomStyles } from './NazarenoColumns';
 import { FaSortUp } from 'react-icons/fa';
+import { ShowNotify } from '../../../components/commons/shownotify';
+
+const createLinkDownload = (url, filename = 'nazarenos.xlsx') => {
+  const link = document.createElement('a');
+  link.href = url;
+  link.setAttribute('download', filename);
+  document.body.appendChild(link);
+  link.click();
+
+  document.body.removeChild(link);
+  window.URL.revokeObjectURL(url);
+};
 
 function NazarenoTable() {
   const [page, setPage] = useState(1);
@@ -19,30 +31,22 @@ function NazarenoTable() {
   const token = useSelector(state => state.auth.token);
 
   const handleExport = async () => {
-    try {
-      const [err, response] = await axiosGetRequest(
-        API_URL + '/api/nazareno/excelData',
-        {
-          headers: { Authorization: `Bearer ${token}` },
-          responseType: 'blob',
-        },
-      );
+    const [_, response] = await axiosGetRequest(
+      API_URL + '/api/nazareno/excelData',
+      {
+        headers: { Authorization: `Bearer ${token}` },
+        responseType: 'blob',
+      },
+    );
 
-      if (err) throw new Error('Error al descargar el archivo');
+    if (!response)
+      return ShowNotify('danger', 'No tienes acceso a esta función');
 
-      const url = window.URL.createObjectURL(
-        new Blob([response], { type: response.type }),
-      );
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'nazarenos.xlsx';
-      document.body.appendChild(link);
-      link.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(link);
-    } catch (error) {
-      console.error(error);
-    }
+    const url = window.URL.createObjectURL(
+      new Blob([response], { type: response.type }),
+    );
+
+    createLinkDownload(url);
   };
 
   const filteredData =

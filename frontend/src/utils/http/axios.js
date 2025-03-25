@@ -15,8 +15,6 @@ const axiosGetRequest = async (url, config) => {
 const axiosPostRequest = async (url, data, config = {}) => {
   try {
     const response = (await axiosInstance.post(url, data, config)).data;
-    console.log(response);
-
     return [null, response];
   } catch (error) {
     const { data } = error.response;
@@ -40,7 +38,6 @@ const axiosDeleteRequest = async (url, config) => {
     return [null, response];
   } catch (error) {
     const { data } = error.response;
-
     return [data.err, null];
   }
 };

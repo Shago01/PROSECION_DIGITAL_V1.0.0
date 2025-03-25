@@ -191,9 +191,6 @@ export const FormNazareno = () => {
   } = useForm();
 
   const onSubmit = async data => {
-    console.log(data);
-    console.log(token);
-
     const [err, response] = await axiosPostRequest(
       API_URL + '/api/nazareno',
       data,
@@ -201,8 +198,6 @@ export const FormNazareno = () => {
         headers: { Authorization: `Bearer ${token}` },
       },
     );
-    console.log(response);
-    console.log(err);
 
     if (err) {
       ShowNotify('danger', err.msg);
