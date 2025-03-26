@@ -37,7 +37,6 @@ const inputs = [
     options: [
       { value: 'M', label: 'Masculino' },
       { value: 'F', label: 'Femenino' },
-      { value: 'O', label: 'Otro' },
     ],
     validation: { required: 'Este campo es obligatorio' },
   },
@@ -112,19 +111,6 @@ const inputs = [
     validation: { required: 'Este campo es obligatorio' },
   },
   {
-    label: 'Correo Electrónico',
-    icon: <FaEnvelope className="text-gray-600" />,
-    type: 'email',
-    name: 'email',
-    validation: {
-      required: 'Este campo es obligatorio',
-      pattern: {
-        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-        message: 'Correo electrónico no válido',
-      },
-    },
-  },
-  {
     label: 'Teléfono',
     icon: <FaPhone className="text-gray-600" />,
     type: 'text',
@@ -138,17 +124,22 @@ const inputs = [
     },
   },
   {
-    label: 'Dirección',
-    icon: <FaMapMarkerAlt className="text-gray-600" />,
-    type: 'text',
-    name: 'address',
-    validation: { required: 'Este campo es obligatorio' },
-  },
-  {
     label: 'País',
     icon: <FaGlobe className="text-gray-600" />,
     type: 'text',
     name: 'country',
+    validation: {
+      pattern: {
+        value: /^[a-zA-Z\s]+$/,
+        message: 'Solo se permiten letras y espacios',
+      },
+    },
+  },
+  {
+    label: 'Departamento',
+    icon: <FaCity className="text-gray-600" />,
+    type: 'text',
+    name: 'department',
     validation: {
       pattern: {
         value: /^[a-zA-Z\s]+$/,
@@ -169,22 +160,18 @@ const inputs = [
     },
   },
   {
-    label: 'Departamento',
-    icon: <FaCity className="text-gray-600" />,
+    label: 'Dirección',
+    icon: <FaMapMarkerAlt className="text-gray-600" />,
     type: 'text',
-    name: 'department',
-    validation: {
-      pattern: {
-        value: /^[a-zA-Z\s]+$/,
-        message: 'Solo se permiten letras y espacios',
-      },
-    },
+    name: 'address',
+    validation: { required: 'Este campo es obligatorio' },
   },
 ];
 
 export const FormNazareno = () => {
   const token = useSelector(state => state.auth.token);
   const {
+    reset,
     register,
     formState: { errors },
     handleSubmit,
@@ -206,6 +193,7 @@ export const FormNazareno = () => {
       return;
     }
     ShowNotify('success', response.message);
+    reset();
   };
 
   return (
