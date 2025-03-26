@@ -1,20 +1,18 @@
 import { useForm } from 'react-hook-form';
 import {
-  FaIdCard,
-  FaUser,
-  FaEnvelope,
-  FaPhone,
-  FaMapMarkerAlt,
-  FaGlobe,
-  FaCity,
-  FaMap,
   FaCalendar,
+  FaCity,
+  FaGlobe,
+  FaIdCard,
+  FaMapMarkerAlt,
+  FaPhone,
+  FaUser,
   FaVenusMars,
 } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
-import { axiosPostRequest } from '../../../utils/http/axios';
 import { ShowNotify } from '../../../components/commons/shownotify';
 import { API_URL } from '../../../config/configenv';
+import { axiosPostRequest } from '../../../utils/http/axios';
 
 const inputs = [
   {

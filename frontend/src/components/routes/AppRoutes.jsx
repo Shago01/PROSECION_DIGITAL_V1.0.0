@@ -5,6 +5,7 @@ import { ProtectedRoute } from './ProtectedRoute';
 import DashboardHome from '../../pages/dashboard/DashboradHome';
 import TableNazareno from '../../pages/dashboard/nazarenos/TableNazareno';
 import { FormNazareno } from '../../pages/dashboard/nazarenos/FormNazareno';
+import AdminNazreno from '../../pages/dashboard/nazarenos/AdminNazareno';
 
 export const AppRoutes = () => {
   return (
@@ -15,10 +16,18 @@ export const AppRoutes = () => {
       {/* Rutas protegidas */}
       <Route element={<ProtectedRoute />}>
         <Route path="/dashboard" element={<DashboardPage />}>
-          <Route path="/dashboard/home" element={<DashboardHome />} />
-          <Route path="/dashboard/users" element={<DashboardPage />} />
-          <Route path="/dashboard/naz/table" element={<TableNazareno />} />
-          <Route path="/dashboard/naz/register" element={<FormNazareno />} />
+          <Route path="home" element={<DashboardHome />} />
+          <Route path="users">
+            <Route path="table" />
+            <Route path="register" />
+            <Route path="administracion" />
+          </Route>
+          <Route />
+          <Route path="naz">
+            <Route path="table" element={<TableNazareno />} />
+            <Route path="register" element={<FormNazareno />} />
+            <Route path="administracion" element={<AdminNazreno />} />
+          </Route>
         </Route>
       </Route>
 

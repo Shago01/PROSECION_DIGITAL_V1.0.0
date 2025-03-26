@@ -12,6 +12,7 @@ function useFetch(url) {
 
   useEffect(() => {
     if (!token) return;
+    if (!url) return;
 
     let isMounted = true;
 
@@ -22,11 +23,13 @@ function useFetch(url) {
         const [err, response] = await axiosGetRequest(API_URL + url, {
           headers: { Authorization: `Bearer ${token}` },
         });
+
         if (err) throw err;
         if (isMounted) setData(response.data);
         ShowNotify('success', `${response.message} ✅`);
       } catch (err) {
-        if (isMounted) setError(err.message);
+        if (isMounted) setError(err.msg);
+        ShowNotify('danger', err.msg);
       } finally {
         if (isMounted) setLoading(false);
       }

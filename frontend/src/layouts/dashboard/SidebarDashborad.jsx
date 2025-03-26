@@ -1,5 +1,6 @@
 import { FaTable, FaUser } from 'react-icons/fa';
-import { FiHome, FiLogOut, FiSettings } from 'react-icons/fi';
+import { FaUserGear } from 'react-icons/fa6';
+import { FiHome, FiLogOut } from 'react-icons/fi';
 import { IoMdPersonAdd } from 'react-icons/io';
 import { SidebarDropdown } from '../../components/ui/SidebarDropdown';
 import SidebarItem from '../../components/ui/SidebarItem';
@@ -38,6 +39,12 @@ export function SidebarDashboard() {
           to: '/dashboard/user/register',
           style: `${styles.base} ${styles.primary}`,
         },
+        {
+          icon: FaUserGear,
+          text: 'Administrar',
+          to: '/dashboard/user/register',
+          style: `${styles.base} ${styles.primary}`,
+        },
       ],
     },
     {
@@ -57,6 +64,12 @@ export function SidebarDashboard() {
           to: '/dashboard/naz/register',
           style: `${styles.base} ${styles.primary}`,
         },
+        {
+          icon: FaUserGear,
+          text: 'Administrar',
+          to: '/dashboard/naz/administracion',
+          style: `${styles.base} ${styles.primary}`,
+        },
       ],
     },
     {
@@ -68,7 +81,7 @@ export function SidebarDashboard() {
   ];
 
   return (
-    <aside className="w-64 flex-shrink-0 bg-white shadow-lg p-5">
+    <aside className="w-64 flex-shrink-0 bg-white shadow-lg p-5 overflow-auto scrollbar-hide">
       <h2 className="text-xl font-semibold text-gray-700 mb-6">Menú</h2>
       <nav>
         <ul className="space-y-2 text-sm">
