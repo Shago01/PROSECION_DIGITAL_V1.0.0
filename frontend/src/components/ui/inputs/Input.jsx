@@ -1,12 +1,24 @@
 import { useState } from 'react';
+import { FaSearch } from 'react-icons/fa';
+import { ShowNotify } from '../../commons/shownotify';
 
-const Input = ({ onBuscar, label, labelbtn }) => {
+const Input = ({
+  onBuscar,
+  label,
+  labelbtn,
+  placeholder = 'Ingrese un valor',
+  inputType = 'text',
+  icon: Icon = FaSearch,
+}) => {
   const [codigo, setCodigo] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
+
     if (codigo.trim() !== '') {
-      onBuscar(codigo);
+      onBuscar(codigo.trim());
+    } else {
+      ShowNotify('warning', 'Ingrese un cedula');
     }
   };
 
@@ -17,17 +29,17 @@ const Input = ({ onBuscar, label, labelbtn }) => {
           {label}
         </label>
         <input
-          type="text"
+          type={inputType}
           value={codigo}
           onChange={e => setCodigo(e.target.value)}
           className="w-full border border-gray-300 mb-4 px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-          placeholder="Ingrese la cédula"
+          placeholder={placeholder}
         />
         <button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition duration-200 shadow-md"
+          className="w-full mt-3 bg-blue-500 text-white p-2 rounded-lg flex items-center justify-center gap-2 cursor-pointer hover:bg-blue-600 active:shadow-inner transform active:translate-y-1 transition-all "
         >
-          {labelbtn}
+          {Icon && <Icon />} {labelbtn}
         </button>
       </form>
     </div>

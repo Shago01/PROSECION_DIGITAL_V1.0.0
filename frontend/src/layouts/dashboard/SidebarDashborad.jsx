@@ -2,8 +2,8 @@ import { FaTable, FaUser } from 'react-icons/fa';
 import { FaUserGear } from 'react-icons/fa6';
 import { FiHome, FiLogOut } from 'react-icons/fi';
 import { IoMdPersonAdd } from 'react-icons/io';
-import { SidebarDropdown } from '../../components/ui/SidebarDropdown';
-import SidebarItem from '../../components/ui/SidebarItem';
+import { SidebarDropdown } from '../../components/ui/dropdowns/SidebarDropdown';
+import SidebarItem from '../../components/ui/dropdowns/SidebarItem';
 import useAuth from '../../hooks/auth/useAuth';
 
 const styles = {

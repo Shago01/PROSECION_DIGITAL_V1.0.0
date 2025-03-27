@@ -1,11 +1,11 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { DashboardPage } from '../../pages/dashboard/DashboardPage';
+import DashboardHome from '../../pages/dashboard/DashboradHome';
+import AdminNazreno from '../../pages/dashboard/nazarenos/AdminNazareno';
+import { RegisterNazareno } from '../../pages/dashboard/nazarenos/RegisterNazareno';
+import TableNazareno from '../../pages/dashboard/nazarenos/TableNazareno';
 import LoginPage from '../../pages/LoginPage';
 import { ProtectedRoute } from './ProtectedRoute';
-import DashboardHome from '../../pages/dashboard/DashboradHome';
-import TableNazareno from '../../pages/dashboard/nazarenos/TableNazareno';
-import { FormNazareno } from '../../pages/dashboard/nazarenos/FormNazareno';
-import AdminNazreno from '../../pages/dashboard/nazarenos/AdminNazareno';
 
 export const AppRoutes = () => {
   return (
@@ -25,7 +25,7 @@ export const AppRoutes = () => {
           <Route />
           <Route path="naz">
             <Route path="table" element={<TableNazareno />} />
-            <Route path="register" element={<FormNazareno />} />
+            <Route path="register" element={<RegisterNazareno />} />
             <Route path="administracion" element={<AdminNazreno />} />
           </Route>
         </Route>

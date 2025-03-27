@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   FaCalendar,
@@ -9,10 +10,6 @@ import {
   FaUser,
   FaVenusMars,
 } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
-import { ShowNotify } from '../../../components/commons/shownotify';
-import { API_URL } from '../../../config/configenv';
-import { axiosPostRequest } from '../../../utils/http/axios';
 
 const inputs = [
   {
@@ -166,80 +163,71 @@ const inputs = [
   },
 ];
 
-export const FormNazareno = () => {
-  const token = useSelector(state => state.auth.token);
+export default function FormNazareno({ onSubmit, defaultValues }) {
   const {
-    reset,
     register,
+    reset,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
-  const onSubmit = async data => {
-    const [err, response] = await axiosPostRequest(
-      API_URL + '/api/nazareno',
-      data,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      },
-    );
+  useEffect(() => {
+    if (defaultValues) {
+      console.log('estos son los valores envidos', defaultValues);
 
-    if (err) {
-      ShowNotify('danger', err.msg);
-      if (err.details.length != 0)
-        err.details.forEach(({ msg }) => ShowNotify('warning', msg));
-      return;
+      reset({
+        ...defaultValues,
+        birthdate: defaultValues.birthdate || '',
+      });
     }
-    ShowNotify('success', response.message);
-    reset();
-  };
+  }, [defaultValues, reset]);
 
   return (
-    <div className="w-full max-w-5xl  bg-white shadow-lg rounded-lg  mx-auto p-8 overflow-auto scrollbar-hide">
-      <h2 className="text-4xl  rounded-lg p-6 font-bold mb-10 text-center text-blue-400">
-        Formulario de Registro
-      </h2>
-      <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {inputs.map((field, index) => (
-            <div key={index}>
-              <label className="text-gray-800 font-semibold mb-2 flex items-center gap-2">
-                {field.icon}
-                {field.label}
-              </label>
-              {field.type === 'select' ? (
-                <select
-                  {...register(field.name, field.validation)}
-                  className="border border-gray-300 w-full px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  {field.options.map((option, idx) => (
-                    <option key={idx} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              ) : (
-                <input
-                  type={field.type}
-                  {...register(field.name, field.validation)}
-                  className="border border-gray-300 w-full px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              )}
-              {errors[field.name] && (
-                <p className="text-red-500 text-sm mt-2">
-                  {errors[field.name]?.message}
-                </p>
-              )}
-            </div>
-          ))}
-        </div>
-        <button
-          type="submit"
-          className="w-full px-6 py-3 bg-blue-600 text-white rounded-md shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          Enviar
-        </button>
-      </form>
-    </div>
+    <form
+      className="space-y-8 text-sm m-4 text-gray-600 font-normal"
+      onSubmit={handleSubmit(data => {
+        if (onSubmit(data)) reset();
+      })}
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {inputs.map((field, index) => (
+          <div key={index}>
+            <label className="text-gray-800 font-semibold mb-2 flex items-center gap-2">
+              {field.icon}
+              {field.label}
+            </label>
+            {field.type === 'select' ? (
+              <select
+                {...register(field.name, field.validation)}
+                className="border border-gray-300 w-full px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                {field.options.map((option, idx) => (
+                  <option key={idx} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <input
+                type={field.type}
+                {...register(field.name, field.validation)}
+                className="border border-gray-300 w-full px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            )}
+            {errors[field.name] && (
+              <p className="text-red-500 text-sm mt-2">
+                {errors[field.name]?.message}
+              </p>
+            )}
+          </div>
+        ))}
+      </div>
+      <button
+        type="submit"
+        className="w-full px-6 py-3 bg-blue-600 text-white rounded-md shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer "
+      >
+        Enviar
+      </button>
+    </form>
   );
-};
+}

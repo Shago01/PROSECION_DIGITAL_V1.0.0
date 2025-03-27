@@ -39,13 +39,6 @@ export const NazarenoColumns = [
     sortable: true,
   },
   {
-    selector: row => row.email,
-    width: '180px',
-    id: 'Correo',
-    name: 'Correo',
-    sortable: true,
-  },
-  {
     selector: row => row.phoneNumber,
     id: 'Teléfono',
     name: 'Teléfono',

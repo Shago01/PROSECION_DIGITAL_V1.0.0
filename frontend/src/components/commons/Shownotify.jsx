@@ -6,9 +6,8 @@ export function ShowNotify(type, message) {
     autoClose: 5000,
     hideProgressBar: false,
     pauseOnHover: true,
+    closeOnClick: true,
   };
-
-  console.log(type, message);
 
   switch (type) {
     case 'info':
@@ -23,7 +22,8 @@ export function ShowNotify(type, message) {
     case 'success':
       toast.success(message, op);
       break;
-    default:
+    case 'basic':
+      toast(message, op);
       break;
   }
 }

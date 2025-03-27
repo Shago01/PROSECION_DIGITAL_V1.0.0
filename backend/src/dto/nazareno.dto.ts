@@ -211,7 +211,6 @@ export class NazarenoResponse implements ResNazareno {
   constructor(data: ResNazareno) {
     Object.assign(this, data);
     this.age = this.getAge();
-    delete this.birthdate;
   }
 
   getAge(): number {

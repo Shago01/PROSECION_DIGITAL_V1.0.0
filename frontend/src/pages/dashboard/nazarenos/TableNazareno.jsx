@@ -1,25 +1,18 @@
-import DataTable from 'react-data-table-component';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import useFetch from '../../../hooks/http/useFetch';
-import SkeletonTable from '../../../components/skeleton/SkeletonTable';
-import { axiosGetRequest } from '../../../utils/http/axios';
-import { API_URL } from '../../../config/configenv';
-import NazarenoSearchBar from './NazarenoSearchBar';
-import { NazarenoColumns, tableCustomStyles } from './NazarenoColumns';
+import DataTable from 'react-data-table-component';
 import { FaSortUp } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 import { ShowNotify } from '../../../components/commons/shownotify';
-
-const createLinkDownload = (url, filename = 'nazarenos.xlsx') => {
-  const link = document.createElement('a');
-  link.href = url;
-  link.setAttribute('download', filename);
-  document.body.appendChild(link);
-  link.click();
-
-  document.body.removeChild(link);
-  window.URL.revokeObjectURL(url);
-};
+import SkeletonTable from '../../../components/skeleton/SkeletonTable';
+import { API_URL } from '../../../config/configenv';
+import useFetch from '../../../hooks/http/useFetch';
+import { axiosGetRequest } from '../../../utils/http/axios';
+import {
+  exportNazarenosData,
+  filterNazarenosData,
+} from '../../../utils/nazarenosUtils';
+import { NazarenoColumns, tableCustomStyles } from './NazarenoColumns';
+import NazarenoSearchBar from './NazarenoSearchBar';
 
 function NazarenoTable() {
   const [page, setPage] = useState(1);
@@ -30,34 +23,10 @@ function NazarenoTable() {
   );
   const token = useSelector(state => state.auth.token);
 
-  const handleExport = async () => {
-    const [_, response] = await axiosGetRequest(
-      API_URL + '/api/nazareno/excelData',
-      {
-        headers: { Authorization: `Bearer ${token}` },
-        responseType: 'blob',
-      },
-    );
+  const handleExport = () =>
+    exportNazarenosData(token, axiosGetRequest, API_URL, ShowNotify);
 
-    if (!response)
-      return ShowNotify('danger', 'No tienes acceso a esta función');
-
-    const url = window.URL.createObjectURL(
-      new Blob([response], { type: response.type }),
-    );
-
-    createLinkDownload(url);
-  };
-
-  const filteredData =
-    data?.cotent?.filter(
-      row =>
-        row.code?.toString().toLowerCase().includes(search.toLowerCase()) ||
-        row.documentNumber
-          ?.toString()
-          .toLowerCase()
-          .includes(search.toLowerCase()),
-    ) || [];
+  const filteredData = filterNazarenosData(data, search);
 
   return loading ? (
     <SkeletonTable />
