@@ -1,19 +1,19 @@
 export const NazarenoColumns = [
   { selector: row => row.code, id: 'Código', name: 'Código', sortable: true },
   {
-    selector: row => row.documentType,
-    id: 'Tipo Documento',
-    name: 'Tipo Documento',
-    sortable: true,
-  },
-  { selector: row => row.sex, id: 'Sexo', name: 'Sexo', sortable: true },
-  {
     selector: row => row.documentNumber,
     width: '180px',
     id: 'Número Documento',
     name: 'Número Documento',
     sortable: true,
   },
+  {
+    selector: row => row.documentType,
+    id: 'Tipo Documento',
+    name: 'Tipo Documento',
+    sortable: true,
+  },
+  { selector: row => row.sex, id: 'Sexo', name: 'Sexo', sortable: true },
   {
     selector: row => row.firstName,
     id: 'Nombre',

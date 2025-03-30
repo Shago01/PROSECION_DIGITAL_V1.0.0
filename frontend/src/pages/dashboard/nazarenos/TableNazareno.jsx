@@ -31,7 +31,7 @@ function NazarenoTable() {
   return loading ? (
     <SkeletonTable />
   ) : (
-    <div className="w-full mr-4 ml-4 bg-white shadow-lg rounded-lg overflow-auto p-4">
+    <div className="w-full p-4  bg-white shadow-lg rounded-lg overflow-auto scrollbar-hide sm:mr-4 sm:ml-4">
       <NazarenoSearchBar
         search={search}
         setSearch={setSearch}
@@ -56,9 +56,16 @@ function NazarenoTable() {
         highlightOnHover
         pointerOnHover
         sortIcon={<FaSortUp />}
-        customStyles={tableCustomStyles}
+        customStyles={{
+          ...tableCustomStyles,
+          tableWrapper: {
+            style: {
+              overflowX: 'auto',
+            },
+          },
+        }}
         fixedHeader
-        fixedHeaderScrollHeight="340px"
+        fixedHeaderScrollHeight="60vh"
       />
     </div>
   );

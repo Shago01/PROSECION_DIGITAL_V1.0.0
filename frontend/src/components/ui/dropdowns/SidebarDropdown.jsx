@@ -8,7 +8,7 @@ export function SidebarDropdown({ icon: Icon, text, children }) {
     <div className="flex flex-col">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between gap-3 p-3 rounded-lg cursor-pointer text-gray-700 hover:bg-gradient-to-r from-blue-500 to-blue-700 hover:text-white transition-all w-full"
+        className="flex items-center justify-between gap-3 p-3 rounded-lg cursor-pointer hover:bg-gradient-to-r from-blue-500 to-blue-700 hover:text-white transition-all w-full"
       >
         <div className="flex items-center gap-3">
           {Icon && <Icon size={20} />}

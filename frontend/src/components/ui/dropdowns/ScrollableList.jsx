@@ -26,10 +26,12 @@ function ListItem({ item }) {
         <h3 className="font-semibold text-gray-800">
           {item.firstName} {item.middleName} {item.firstLastName}{' '}
           {item.secondLastName}
-          <span className="text-xs ml-2 text-gray-500">{item.email}</span>
+          <span className="block text-xs mt-1 text-gray-500 sm:inline sm:ml-2">
+            {item.email}
+          </span>
         </h3>
 
-        <div className="grid grid-cols-2 gap-x-5 mt-1 text-xs text-gray-600">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-2 mt-1 text-xs text-gray-600">
           <InfoItem
             icon={<FaIdCard />}
             text={`${item.documentType}: ${item.documentNumber}`}
@@ -73,7 +75,7 @@ function InfoItem({ icon, text }) {
 
 const NazarenoList = ({ users }) => {
   return (
-    <div className="max-h-72 overflow-y-auto scrollbar-hide rounded-xl">
+    <div className=" h-full sm:max-h-77 overflow-y-auto scrollbar-hide rounded-xl">
       {users.length > 0 ? (
         users.map((item, index) => <ListItem key={index} item={item} />)
       ) : (

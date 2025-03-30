@@ -9,7 +9,7 @@ function DashboardHome() {
   );
 
   return (
-    <div className="flex flex-col flex-grow mx-2 gap-4">
+    <div className="flex flex-col flex-grow mx-2 gap-4 overflow-auto scrollbar-hide">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 w-full">
         <DashboardCards data={data} loading={loading} />
       </div>

@@ -11,6 +11,8 @@ import {
   FaVenusMars,
 } from 'react-icons/fa';
 
+// TODO: AGREGAR VALIDACIONES AL NAZARENO
+
 const inputs = [
   {
     label: 'Tipo de Documento',
@@ -163,7 +165,7 @@ const inputs = [
   },
 ];
 
-export default function FormNazareno({ onSubmit, defaultValues }) {
+export default function FormNazareno({ onSubmit: onSub, defaultValues }) {
   const {
     register,
     reset,
@@ -185,8 +187,10 @@ export default function FormNazareno({ onSubmit, defaultValues }) {
   return (
     <form
       className="space-y-8 text-sm m-4 text-gray-600 font-normal"
-      onSubmit={handleSubmit(data => {
-        if (onSubmit(data)) reset();
+      onSubmit={handleSubmit(async data => {
+        if (await onSub(data)) {
+          reset();
+        }
       })}
     >
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

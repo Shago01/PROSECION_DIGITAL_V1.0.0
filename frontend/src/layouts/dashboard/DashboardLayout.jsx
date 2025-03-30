@@ -7,7 +7,7 @@ function DashboardLayout() {
   return (
     <>
       <HeaderDashborad />
-      <div className="flex flex-row h-full rounded-lg overflow-hidden mr-3 m-2 ">
+      <div className="flex flex-col gap-4 sm:gap-0 sm:flex-row h-full rounded-lg overflow-hidden mr-3 m-2 ">
         <SidebarDashboard />
         <Outlet />
       </div>

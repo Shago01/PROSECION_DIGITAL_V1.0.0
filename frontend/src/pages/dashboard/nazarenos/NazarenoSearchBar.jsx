@@ -1,9 +1,10 @@
 // src/components/nazareno/NazarenoSearchBar.js
-import { FaSearch, FaFileExcel } from 'react-icons/fa';
+import { FaFileExcel, FaSearch } from 'react-icons/fa';
+import { RiResetLeftLine } from 'react-icons/ri';
 
 function NazarenoSearchBar({ search, setSearch, handleExport }) {
   return (
-    <div className="relative mb-4 gap-4 flex items-center">
+    <div className="relative mb-4 gap-4 flex flex-wrap items-center">
       <div className="relative flex-grow">
         <FaSearch className="absolute left-3 top-2 text-gray-500" />
         <input
@@ -15,11 +16,18 @@ function NazarenoSearchBar({ search, setSearch, handleExport }) {
         />
       </div>
       <button
-        className="ml-2 px-4 py-2 bg-green-600 text-white rounded-md flex items-center hover:bg-green-700 transition-all duration-200"
+        className="ml-2 px-4 py-2 bg-green-600 text-white rounded-md flex items-center hover:bg-green-700 transition-all duration-200 cursor-pointer"
         onClick={handleExport}
       >
         <FaFileExcel className="mr-2" />
         Exportar a Excel
+      </button>
+      <button
+        className="ml-2 px-4 py-2 bg-amber-600 text-white rounded-md flex items-center hover:bg-amber-700 transition-all duration-200 cursor-pointer"
+        onClick={handleExport}
+      >
+        <RiResetLeftLine className="mr-2" />
+        Reset activo
       </button>
     </div>
   );
