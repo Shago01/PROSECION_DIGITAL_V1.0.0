@@ -15,7 +15,7 @@ import { API_URL } from '../../../config/configenv';
 export default function AdminNazareno() {
   const token = useSelector(state => state.auth.token);
   const [endpoint, setEndpoint] = useState(null);
-  const { data, loading } = useFetch(endpoint);
+  const { data, loading, refetch } = useFetch(endpoint);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   console.log(data);
@@ -41,7 +41,7 @@ export default function AdminNazareno() {
   };
 
   const onActiveClick = async () => {
-    const [err, response] = await axiosPatchRequest(
+    const [err, _] = await axiosPatchRequest(
       API_URL + `/api/nazareno/active/${data.code}`,
       null,
       {
@@ -49,9 +49,9 @@ export default function AdminNazareno() {
       },
     );
     if (err) {
-      ShowNotify('danger', err.msg);
+      return ShowNotify('danger', err.msg);
     }
-    console.log(response);
+    refetch();
   };
 
   const print = {
