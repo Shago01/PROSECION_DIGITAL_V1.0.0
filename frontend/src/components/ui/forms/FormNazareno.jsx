@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
 import {
   FaCalendar,
   FaCity,
@@ -10,8 +8,7 @@ import {
   FaUser,
   FaVenusMars,
 } from 'react-icons/fa';
-
-// TODO: AGREGAR VALIDACIONES AL NAZARENO
+import Form from './Form';
 
 const inputs = [
   {
@@ -48,6 +45,14 @@ const inputs = [
         value: /^[0-9]+$/,
         message: 'Solo se permiten números',
       },
+      minLength: {
+        value: 8,
+        message: 'Debe tener al menos 8 caracteres',
+      },
+      maxLength: {
+        value: 15,
+        message: 'Debe tener máximo 15 caracteres',
+      },
     },
   },
   {
@@ -61,6 +66,11 @@ const inputs = [
         value: /^[a-zA-Z\s]+$/,
         message: 'Solo se permiten letras y espacios',
       },
+      minLength: {
+        value: 2,
+        message: 'Debe tener al menos 2 caracteres',
+      },
+      trim: true,
     },
   },
   {
@@ -73,6 +83,7 @@ const inputs = [
         value: /^[a-zA-Z\s]+$/,
         message: 'Solo se permiten letras y espacios',
       },
+      trim: true,
     },
   },
   {
@@ -86,6 +97,11 @@ const inputs = [
         value: /^[a-zA-Z\s]+$/,
         message: 'Solo se permiten letras y espacios',
       },
+      minLength: {
+        value: 2,
+        message: 'Debe tener al menos 2 caracteres',
+      },
+      trim: true,
     },
   },
   {
@@ -93,11 +109,18 @@ const inputs = [
     icon: <FaUser className="text-gray-600" />,
     type: 'text',
     name: 'secondLastName',
+    required: 'Este campo es obligatorio',
     validation: {
+      required: 'Este campo es obligatorio',
       pattern: {
         value: /^[a-zA-Z\s]+$/,
         message: 'Solo se permiten letras y espacios',
       },
+      minLength: {
+        value: 2,
+        message: 'Debe tener al menos 2 caracteres',
+      },
+      trim: true,
     },
   },
   {
@@ -105,7 +128,17 @@ const inputs = [
     icon: <FaCalendar className="text-gray-600" />,
     type: 'date',
     name: 'birthdate',
-    validation: { required: 'Este campo es obligatorio' },
+    validation: {
+      required: 'Este campo es obligatorio',
+      validate: value => {
+        const today = new Date();
+        const birthDate = new Date(value);
+        const age = today.getFullYear() - birthDate.getFullYear();
+        if (birthDate > today) return 'La fecha no puede ser futura';
+        if (age < 18) return 'Debe ser mayor de 18 años';
+        return true;
+      },
+    },
   },
   {
     label: 'Teléfono',
@@ -117,6 +150,14 @@ const inputs = [
       pattern: {
         value: /^[0-9]+$/,
         message: 'Solo se permiten números',
+      },
+      minLength: {
+        value: 7,
+        message: 'Debe tener al menos 7 dígitos',
+      },
+      maxLength: {
+        value: 15,
+        message: 'Debe tener máximo 15 dígitos',
       },
     },
   },
@@ -130,6 +171,7 @@ const inputs = [
         value: /^[a-zA-Z\s]+$/,
         message: 'Solo se permiten letras y espacios',
       },
+      trim: true,
     },
   },
   {
@@ -142,6 +184,7 @@ const inputs = [
         value: /^[a-zA-Z\s]+$/,
         message: 'Solo se permiten letras y espacios',
       },
+      trim: true,
     },
   },
   {
@@ -154,6 +197,7 @@ const inputs = [
         value: /^[a-zA-Z\s]+$/,
         message: 'Solo se permiten letras y espacios',
       },
+      trim: true,
     },
   },
   {
@@ -161,77 +205,23 @@ const inputs = [
     icon: <FaMapMarkerAlt className="text-gray-600" />,
     type: 'text',
     name: 'address',
-    validation: { required: 'Este campo es obligatorio' },
+    validation: {
+      required: 'Este campo es obligatorio',
+      minLength: {
+        value: 5,
+        message: 'Debe tener al menos 5 caracteres',
+      },
+      pattern: {
+        value: /^[a-zA-Z0-9\s,.-]+$/,
+        message: 'Solo se permiten letras, números y (,.-)',
+      },
+      trim: true,
+    },
   },
 ];
 
-export default function FormNazareno({ onSubmit: onSub, defaultValues }) {
-  const {
-    register,
-    reset,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
-
-  useEffect(() => {
-    if (defaultValues) {
-      console.log('estos son los valores envidos', defaultValues);
-
-      reset({
-        ...defaultValues,
-        birthdate: defaultValues.birthdate || '',
-      });
-    }
-  }, [defaultValues, reset]);
-
+export default function FormNazareno({ onSubmit, defaultValues }) {
   return (
-    <form
-      className="space-y-8 text-sm m-4 text-gray-600 font-normal"
-      onSubmit={handleSubmit(async data => {
-        if (await onSub(data)) {
-          reset();
-        }
-      })}
-    >
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {inputs.map((field, index) => (
-          <div key={index}>
-            <label className="text-gray-800 font-semibold mb-2 flex items-center gap-2">
-              {field.icon}
-              {field.label}
-            </label>
-            {field.type === 'select' ? (
-              <select
-                {...register(field.name, field.validation)}
-                className="border border-gray-300 w-full px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                {field.options.map((option, idx) => (
-                  <option key={idx} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            ) : (
-              <input
-                type={field.type}
-                {...register(field.name, field.validation)}
-                className="border border-gray-300 w-full px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            )}
-            {errors[field.name] && (
-              <p className="text-red-500 text-sm mt-2">
-                {errors[field.name]?.message}
-              </p>
-            )}
-          </div>
-        ))}
-      </div>
-      <button
-        type="submit"
-        className="w-full px-6 py-3 bg-blue-600 text-white rounded-md shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer "
-      >
-        Enviar
-      </button>
-    </form>
+    <Form defaultValues={defaultValues} inputs={inputs} onSub={onSubmit} />
   );
 }

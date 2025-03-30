@@ -22,7 +22,7 @@ function useFetch(url) {
 
       if (err) throw err;
       setData(response.data);
-      ShowNotify('success', `${response.message} ✅`);
+      ShowNotify('success', `${response.message} `);
     } catch (err) {
       setError(err.msg);
       ShowNotify('danger', err.msg);

@@ -9,6 +9,22 @@ import successResponse from '@utils/succesresponse';
 import { NextFunction, Request, Response } from 'express';
 
 class nazarenoController {
+  async updateNazareno(
+    { params, body }: Request,
+    res: Response,
+    nex: NextFunction,
+  ) {
+    try {
+      const { code } = params;
+      if (!code) throw new AppError(ErrorMessage.BAD_REQUEST, 400);
+      const data = new NazarenoRequest(body);
+      const dataDB = await nazarenoService.updateNazareno(code, data);
+      successResponse(res, dataDB, successMessage.UPDATED);
+    } catch (error) {
+      console.log(error);
+      nex(error);
+    }
+  }
   constructor() {}
 
   async getNazarenoExcel(_req: Request, res: Response, nex: NextFunction) {

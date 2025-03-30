@@ -19,12 +19,12 @@ const useAuth = () => {
     }
     const { message, data } = resdata;
     dispatch(login(data.auth));
-    ShowNotify('success', `${message} ✅`);
+    ShowNotify('success', `${message} `);
     navigate('/dashboard');
   };
   const logoutUser = () => {
     dispatch(logout());
-    ShowNotify('success', 'Sesión cerrada ✅');
+    ShowNotify('success', 'Sesión cerrada ');
   };
   return { loginUser, logoutUser };
 };

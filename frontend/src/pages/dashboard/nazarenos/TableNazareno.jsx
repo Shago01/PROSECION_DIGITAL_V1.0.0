@@ -21,7 +21,7 @@ function NazarenoTable() {
   const [limit, setLimit] = useState(25);
   const [search, setSearch] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const [showSecondConfirmation, setShowSecondConfirmation] = useState(false); // Nuevo estado
+  const [showSecondConfirmation, setShowSecondConfirmation] = useState(false);
   const { data, loading, refetch } = useFetch(
     `/api/nazareno/query?page=${page}&limit=${limit}`,
   );

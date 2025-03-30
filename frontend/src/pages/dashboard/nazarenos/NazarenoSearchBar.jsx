@@ -1,4 +1,3 @@
-// src/components/nazareno/NazarenoSearchBar.js
 import { FaFileExcel, FaSearch } from 'react-icons/fa';
 import { RiResetLeftLine } from 'react-icons/ri';
 

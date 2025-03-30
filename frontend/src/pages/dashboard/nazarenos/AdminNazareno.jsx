@@ -18,8 +18,6 @@ export default function AdminNazareno() {
   const { data, loading, refetch } = useFetch(endpoint);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  console.log(data);
-
   const handleSearch = documentNumber => {
     if (endpoint && documentNumber === endpoint.split('/')[4]) {
       ShowNotify('warning', 'Ingrese un número de cedula diferente');
@@ -32,16 +30,24 @@ export default function AdminNazareno() {
     setIsModalOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+  const handleSubmit = async dataSend => {
+    const [err, response] = await axiosPatchRequest(
+      `${API_URL}/api/nazareno/update/${data.code}`,
+      dataSend,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
+    if (err) return ShowNotify('danger', err.msg);
 
-  const handleSubmit = () => {
-    handleCloseModal();
+    console.log(response);
+    ShowNotify('success', response.message);
+    setIsModalOpen(false);
+    refetch();
   };
 
   const onActiveClick = async () => {
-    const [err, _] = await axiosPatchRequest(
+    const [err, response] = await axiosPatchRequest(
       API_URL + `/api/nazareno/active/${data.code}`,
       null,
       {
@@ -49,8 +55,10 @@ export default function AdminNazareno() {
       },
     );
     if (err) {
+      console.log(err);
       return ShowNotify('danger', err.msg);
     }
+    ShowNotify('success', response.message);
     refetch();
   };
 
@@ -85,7 +93,7 @@ export default function AdminNazareno() {
       <DataSection data={data} loading={loading} print={print} />
       {isModalOpen && (
         <Modal
-          onClose={handleCloseModal}
+          onClose={() => setIsModalOpen(false)}
           componetPrint={
             <FormNazareno defaultValues={data} onSubmit={handleSubmit} />
           }
