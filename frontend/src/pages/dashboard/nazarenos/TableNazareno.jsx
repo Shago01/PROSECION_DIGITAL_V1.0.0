@@ -109,6 +109,7 @@ function NazarenoTable() {
         setSearch={setSearch}
         handleExport={onExportExcel}
         handleResetNaz={() => setShowModal(true)}
+        refetch={refetch}
       />
 
       <DataTable

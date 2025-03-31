@@ -42,20 +42,13 @@ export function SidebarDashboard() {
         {
           icon: FaTable,
           text: 'Tabla',
-          to: '/dashboard/user/tabla',
+          to: '/dashboard/user/table',
           style: `${styles.base} ${styles.primary}`,
           handleClick: () => toggleSidebar(),
         },
         {
           icon: IoMdPersonAdd,
           text: 'Registrar',
-          to: '/dashboard/user/register',
-          style: `${styles.base} ${styles.primary}`,
-          handleClick: () => toggleSidebar(),
-        },
-        {
-          icon: FaUserGear,
-          text: 'Administrar',
           to: '/dashboard/user/register',
           style: `${styles.base} ${styles.primary}`,
           handleClick: () => toggleSidebar(),

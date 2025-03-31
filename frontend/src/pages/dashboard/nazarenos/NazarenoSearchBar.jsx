@@ -1,4 +1,4 @@
-import { FaFileExcel, FaSearch } from 'react-icons/fa';
+import { FaFileExcel, FaSearch, FaSyncAlt } from 'react-icons/fa';
 import { RiResetLeftLine } from 'react-icons/ri';
 
 function NazarenoSearchBar({
@@ -6,6 +6,7 @@ function NazarenoSearchBar({
   setSearch,
   handleExport,
   handleResetNaz,
+  refetch,
 }) {
   return (
     <div className="relative mb-4 gap-4 flex flex-wrap items-center">
@@ -32,6 +33,12 @@ function NazarenoSearchBar({
       >
         <RiResetLeftLine className="mr-2" />
         Reset activo
+      </button>
+      <button
+        onClick={refetch}
+        className="flex items-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer"
+      >
+        <FaSyncAlt className="mr-2" /> Refrescar
       </button>
     </div>
   );

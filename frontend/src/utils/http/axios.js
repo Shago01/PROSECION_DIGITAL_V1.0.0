@@ -41,6 +41,7 @@ const axiosDeleteRequest = async (url, config) => {
     return [data.err, null];
   }
 };
+
 const axiosPatchRequest = async (url, data = null, config) => {
   try {
     const response = (await axiosInstance.patch(url, data, config)).data;
