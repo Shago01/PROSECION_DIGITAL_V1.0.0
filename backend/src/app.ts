@@ -1,15 +1,19 @@
+import { NODE_ENV } from '@config/dotenv';
+import errorHandler from '@middlewares/errorHandler';
 import apiRoutes from '@routes/api.routes';
-import express, { json } from 'express';
+import cors from 'cors';
+import { Express, json } from 'express';
 import morgan from 'morgan';
 
-const app = express();
+export default (app: Express) => {
+  app.use(cors());
+  app.use(json());
 
-// * middlewares
-app.use(json());
+  if (NODE_ENV?.match('dev')) app.use(morgan('dev'));
 
-//TODO: Borrar antes de hacer build
-app.use(morgan('dev'));
+  // * rutas de la api
+  app.use('/api', apiRoutes);
 
-app.use('api/', apiRoutes);
-
-export default app;
+  // * midlleware de manejo de erorres
+  app.use(errorHandler);
+};
