@@ -38,6 +38,12 @@ nazarenoRoutes.patch(
   nazarenoController.updateNazarenoStatus,
 );
 
+nazarenoRoutes.patch(
+  '/update/:code',
+  verifyRol([Rol.REGISTER]),
+  nazarenoController.updateNazareno,
+);
+
 nazarenoRoutes.use(
   verifyRol([
     Rol.ADMIN,

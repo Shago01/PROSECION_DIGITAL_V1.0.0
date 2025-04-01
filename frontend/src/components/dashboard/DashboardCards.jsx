@@ -6,7 +6,7 @@ import {
   FaUserTimes,
 } from 'react-icons/fa';
 import { SkeletonCard } from '../skeleton/SkeletonCard';
-import Card from '../ui/Card';
+import Card from '../ui/cards/Card';
 import { COLORS } from '../../utils/constants/colorhex';
 
 const cardConfig = [

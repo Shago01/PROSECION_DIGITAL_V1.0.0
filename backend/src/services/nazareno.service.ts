@@ -12,9 +12,15 @@ class NazarenoService {
     return defineWorkBookExcel(data);
   }
 
+  async updateNazareno(code: string, data: NazarenoRequest) {
+    const nazDb = await nazarenoRespository.NazarenoFindCode(code);
+    if (!nazDb) throw new AppError(ErrorMessage.NOT_FOUND, 404);
+    const newNaz = await nazDb.update(data, { where: { code } });
+    return newNaz.dataValues;
+  }
+
   async getBasicAnalitics() {
     const stats = await nazarenoRespository.getBasicAnalitics();
-    if (!stats) throw new AppError(ErrorMessage.SERVER_ERROR);
     return stats;
   }
 
@@ -52,7 +58,7 @@ class NazarenoService {
     const nazdb = await nazarenoRespository.NazarenoFindDocumenNumber(
       data.documentNumber,
     );
-    if (!nazdb) throw new AppError(ErrorMessage.ALREADY_EXISTS, 409);
+    if (nazdb) throw new AppError(ErrorMessage.ALREADY_EXISTS, 409);
     return await nazarenoRespository.NazarenoSave(data);
   }
 

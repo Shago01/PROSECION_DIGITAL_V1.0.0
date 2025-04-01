@@ -1,9 +1,13 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { DashboardPage } from '../../pages/dashboard/DashboardPage';
+import DashboardHome from '../../pages/dashboard/DashboradHome';
+import AdminNazreno from '../../pages/dashboard/nazarenos/AdminNazareno';
+import { RegisterNazareno } from '../../pages/dashboard/nazarenos/RegisterNazareno';
+import TableNazareno from '../../pages/dashboard/nazarenos/TableNazareno';
 import LoginPage from '../../pages/LoginPage';
 import { ProtectedRoute } from './ProtectedRoute';
-import DashboardHome from '../../pages/dashboard/DashboradHome';
-import TableNazareno from '../../pages/dashboard/nazarenos/TableNazareno';
+import RegisterUser from '../../pages/dashboard/user/RegisterUser';
+import TableUser from '../../pages/dashboard/user/TableUser';
 
 export const AppRoutes = () => {
   return (
@@ -14,10 +18,18 @@ export const AppRoutes = () => {
       {/* Rutas protegidas */}
       <Route element={<ProtectedRoute />}>
         <Route path="/dashboard" element={<DashboardPage />}>
-          <Route path="/dashboard/home" element={<DashboardHome />} />
-          <Route path="/dashboard/users" element={<DashboardPage />} />
-          <Route path="/dashboard/naz/table" element={<TableNazareno />} />
-          <Route path="/dashboard/naz/register" />
+          <Route path="home" element={<DashboardHome />} />
+          <Route path="user">
+            <Route path="table" element={<TableUser />} />
+            <Route path="register" element={<RegisterUser />} />
+            <Route path="administracion" />
+          </Route>
+          <Route />
+          <Route path="naz">
+            <Route path="table" element={<TableNazareno />} />
+            <Route path="register" element={<RegisterNazareno />} />
+            <Route path="administracion" element={<AdminNazreno />} />
+          </Route>
         </Route>
       </Route>
 

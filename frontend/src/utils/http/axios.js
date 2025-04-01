@@ -38,14 +38,24 @@ const axiosDeleteRequest = async (url, config) => {
     return [null, response];
   } catch (error) {
     const { data } = error.response;
+    return [data.err, null];
+  }
+};
 
+const axiosPatchRequest = async (url, data = null, config) => {
+  try {
+    const response = (await axiosInstance.patch(url, data, config)).data;
+    return [null, response];
+  } catch (error) {
+    const { data } = error.response;
     return [data.err, null];
   }
 };
 
 export {
+  axiosDeleteRequest,
   axiosGetRequest,
+  axiosPatchRequest,
   axiosPostRequest,
   axiosPutRequest,
-  axiosDeleteRequest,
 };

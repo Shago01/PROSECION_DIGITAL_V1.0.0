@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { API_URL } from '../../config/configenv';
 import { axiosGetRequest } from '../../utils/http/axios';
 import { useSelector } from 'react-redux';
@@ -10,36 +10,32 @@ function useFetch(url) {
   const [error, setError] = useState(null);
   const token = useSelector(state => state.auth.token);
 
-  useEffect(() => {
-    if (!token) return;
+  const fetchData = useCallback(async () => {
+    if (!token || !url) return;
 
-    let isMounted = true;
+    setLoading(true);
+    setError(null);
+    try {
+      const [err, response] = await axiosGetRequest(API_URL + url, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-    async function fetchData() {
-      setLoading(true);
-      setError(null);
-      try {
-        const [err, response] = await axiosGetRequest(API_URL + url, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (err) throw err;
-        if (isMounted) setData(response.data);
-        ShowNotify('success', `${response.message} ✅`);
-      } catch (err) {
-        if (isMounted) setError(err.message);
-      } finally {
-        if (isMounted) setLoading(false);
-      }
+      if (err) throw err;
+      setData(response.data);
+      ShowNotify('success', `${response.message} `);
+    } catch (err) {
+      setError(err.msg);
+      ShowNotify('danger', err.msg);
+    } finally {
+      setLoading(false);
     }
-
-    fetchData();
-
-    return () => {
-      isMounted = false;
-    };
   }, [token, url]);
 
-  return { data, loading, error };
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  return { data, loading, error, refetch: fetchData };
 }
 
 export default useFetch;

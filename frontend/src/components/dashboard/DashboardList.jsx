@@ -1,5 +1,5 @@
 import { SkeletonList } from '../skeleton/SkeletonList';
-import { NazarenoList } from '../ui/ScrollableList';
+import { NazarenoList } from '../ui/dropdowns/ScrollableList';
 
 export const DashboardList = ({ data, loading }) => {
   if (loading) {

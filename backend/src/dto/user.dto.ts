@@ -73,13 +73,15 @@ export class UserResponse implements UserResponseI {
   id!: UUID;
   name!: string;
   email!: string;
+  username!: string;
   rol!: UserRol;
 
-  constructor({ email, id, name, rol }: UserResponse) {
+  constructor({ email, id, name, rol, username }: UserResponse) {
     this.email = email;
     this.id = id;
     this.name = name;
     this.rol = rol;
+    this.username = username;
   }
 }
 
